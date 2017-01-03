@@ -1,0 +1,43 @@
+/*
+ * Copyright (C) 2017 SuperPaintman
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/** Imports */
+// @import "node_modules/bootstrap/dist/css/bootstrap.css"
+@import "node_modules/normalize.css/normalize.css"
+
+/** Values */
+$font_main              = "Roboto"
+
+$color_white            = #ffffff
+$color_light_grey       = #fafafa
+$color_grey             = #f3f3f3
+$color_dark_grey        = #4d4d4d
+$color_black            = #1a1a1a
+
+$color_main_bg          = $color_dark_grey
+$color_main_color       = $color_white
+
+/** Init */
+if $font_main == "Roboto"
+  @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,100,300,700&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic")
+
+/** General */
+body
+  background: darken($color_main_bg, 5%)
+  
+  color: $color_main_color
+  
+  font-family: $font_main

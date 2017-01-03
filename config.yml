@@ -1,0 +1,22 @@
+title: "superpaintman.io"
+
+seo:
+    robots:
+        index: true
+        follow: true
+
+    title: superpaintman.io
+    description: SuperPaintman's jumppad
+    keywords:
+        - SuperPaintman
+    local: en_US
+    type: website
+    url: https://superpaintman.io/
+    site_name: superpaintman.io
+
+    twitter:
+        card: summary
+        site: '@superpaintman'
+
+counters:
+    google: ""

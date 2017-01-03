@@ -1,0 +1,24 @@
+# Git
+.git/
+
+# NPM
+node_modules/
+
+# TMP
+tmp/
+.gulp-tmp/
+
+
+# Builds
+public/
+
+# Tests
+coverage/
+
+# Logs
+logs/
+*.log
+
+# Docs
+docs/
+docs-api/

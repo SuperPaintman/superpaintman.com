@@ -1,0 +1,155 @@
+//- SEO
+mixin seo(arguments)
+  - var robots_index = arguments.robots.index ? "index" : "noindex"
+  - var robots_follow = arguments.robots.follow ? "follow" : "nofollow"
+  meta(
+    name="robots"
+    content=robots_index + ", " + robots_follow
+  )
+
+  +seo-basic(arguments)
+
+  +seo-og(arguments)
+
+  +seo-twitter(arguments)
+
+//- BASIC
+mixin seo-basic(arguments)
+  //- Title
+  if arguments.title
+    meta(
+      name="title"
+      content= arguments.title
+    )
+
+  //- Description
+  if arguments.description
+    meta(
+      name="description"
+      content= arguments.description
+    )
+
+  //- Keywords
+  if arguments.keywords
+    meta(
+      name="keywords"
+      content= arguments.keywords.join(', ')
+    )
+
+//- Open Graph
+mixin seo-og(arguments)
+  //- Locale
+  if arguments.locale
+    meta(
+      property="og:locale"
+      content= arguments.locale
+    )
+
+  //- Type
+  if arguments.type
+    meta(
+      property="og:type"
+      content= arguments.type
+    )
+
+  //- Title
+  if arguments.title
+    meta(
+      property="og:title"
+      content= arguments.title
+    )
+
+  //- Description
+  if arguments.description
+    meta(
+      property="og:description"
+      content= arguments.description
+    )
+
+  //- Url
+  if arguments.url
+    meta(
+      property="og:url"
+      content= arguments.url
+    )
+
+  //- Site name
+  if arguments.site_name
+    meta(
+      property="og:site_name"
+      content= arguments.site_name
+    )
+
+  //- Image
+  if arguments.image
+    meta(
+      property="og:image"
+      content= arguments.image
+    )
+
+//- Twitter
+mixin seo-twitter(arguments)
+  //- Card
+  if arguments.twitter && arguments.twitter.card
+    meta(
+      name="twitter:card"
+      content= arguments.twitter.card
+    )
+  else
+    meta(
+      name="twitter:card"
+      content= "summary"
+    )
+
+  //- Title
+  if arguments.twitter && arguments.twitter.title
+    meta(
+      name="twitter:title"
+      content= arguments.twitter.title
+    )
+  else
+    if arguments.title
+      meta(
+        name="twitter:title"
+        content= arguments.title
+      )
+
+  //- Description
+  if arguments.twitter && arguments.twitter.description
+    meta(
+      name="twitter:description"
+      content= arguments.twitter.description
+    )
+  else
+    if arguments.description
+      meta(
+        name="twitter:description"
+        content= arguments.description
+      )
+
+  //- Site
+  if arguments.twitter && arguments.twitter.site
+    meta(
+      name="twitter:site"
+      content= arguments.twitter.site
+    )
+
+  //- Site name
+  if arguments.site_name
+    meta(
+      name="twitter:domain"
+      content= arguments.site_name
+    )
+
+  //- Image
+  if arguments.twitter && arguments.twitter.image
+    meta(
+      property="twitter:image"
+      content= arguments.twitter.imag
+    )
+  else
+    if arguments.image
+      meta(
+        property="twitter:image"
+        content= arguments.image
+      )
