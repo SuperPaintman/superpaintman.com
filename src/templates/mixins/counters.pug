@@ -35,9 +35,11 @@ mixin counter-yandex(id)
     })(document, window, "yandex_metrika_callbacks");
   noscript
     div
-      img(src="https://mc.yandex.ru/watch/#{ id }" 
-        style="position:absolute; left:-9999px;" 
-        alt="")
+      img(
+        src="https://mc.yandex.ru/watch/" + id
+        style="position:absolute; left:-9999px;"
+        alt=""
+      )
 
 //- Google
 mixin counter-google(id)
