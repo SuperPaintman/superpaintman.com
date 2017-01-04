@@ -43,6 +43,13 @@ mixin seo-basic(arguments)
       href= arguments.canonical
     )
 
+  //- Theme color
+  if arguments.theme_color
+    meta(
+      name="theme-color"
+      content= arguments.theme_color
+    )
+
 //- Open Graph
 mixin seo-og(arguments)
   //- Locale
