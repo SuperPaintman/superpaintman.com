@@ -1,0 +1,18 @@
+- var dateNow = new Date().getFullYear()
+footer.footer
+  .wrapper
+    .copyright © #{dateNow == 2017 ? dateNow : "2017-" + dateNow} SuperPaintman
+    .license
+      span Licensed under the 
+      a(
+        title=footer.license.text
+        href=footer.license.url
+        target="_blank"
+      )= footer.license.text
+    .repo
+      span Found a bug? Fork this site on 
+      a(
+        title=footer.repo.name
+        href=footer.repo.url
+        target="_blank"
+      )= footer.repo.name

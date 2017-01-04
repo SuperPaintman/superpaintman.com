@@ -20,3 +20,12 @@ seo:
 
 counters:
     google: ""
+
+footer:
+    repo:
+        name: GitHub
+        url: https://github.com/SuperPaintman/superpaintman.io
+
+    license:
+        text: "Apache License, Version 2.0"
+        url: https://raw.githubusercontent.com/SuperPaintman/superpaintman.io/master/LICENSE
