@@ -4,6 +4,10 @@ block content
   .card-list._clearfix
     if links.github
       .card-item
+        link(
+          rel="prefetch"
+          href=links.github.url
+        )
         a.content.-github(
           title=links.github.name
           href=links.github.url
@@ -13,6 +17,10 @@ block content
 
     if links.habrahabr
       .card-item
+        link(
+          rel="prefetch"
+          href=links.habrahabr.url
+        )
         a.content.-habrahabr(
           title=links.habrahabr.name
           href=links.habrahabr.url
@@ -22,6 +30,10 @@ block content
 
     if links.twitter
       .card-item
+        link(
+          rel="prefetch"
+          href=links.twitter.url
+        )
         a.content.-twitter(
           title=links.twitter.name
           href=links.twitter.url
@@ -31,6 +43,10 @@ block content
 
     if links.npm
       .card-item
+        link(
+          rel="prefetch"
+          href=links.npm.url
+        )
         a.content.-npm(
           title=links.npm.name
           href=links.npm.url
@@ -40,6 +56,10 @@ block content
 
     if links.dockerhub
       .card-item
+        link(
+          rel="prefetch"
+          href=links.dockerhub.url
+        )
         a.content.-docker-hub(
           title=links.dockerhub.name
           href=links.dockerhub.url
@@ -49,6 +69,10 @@ block content
 
     if links.headhunter
       .card-item
+        link(
+          rel="prefetch"
+          href=links.headhunter.url
+        )
         a.content.-headhunter(
           title=links.headhunter.name
           href=links.headhunter.url
