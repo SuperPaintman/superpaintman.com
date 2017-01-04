@@ -25,14 +25,38 @@
 /** Values */
 $font_main              = "Roboto"
 
+$card_margin            = 14px
+$card_padding           = 14px
+
+$screen_sm_max          = 768px
+$screen_md_max          = 992px
+$screen_lg_max          = 1200px
+
 $color_white            = #ffffff
 $color_light_grey       = #fafafa
 $color_grey             = #f3f3f3
 $color_dark_grey        = #4d4d4d
 $color_black            = #1a1a1a
 
-$color_main_bg          = $color_dark_grey
-$color_main_color       = $color_white
+$color_main_bg          = #333333
+$color_main_fg          = $color_white
+
+$color_link_fg          = #4A89DC
+
+$color_habrahabr_bg     = #78a3b6
+$color_habrahabr_fg     = #ffffff
+
+$color_twitter_bg       = #1b95e0
+$color_twitter_fg       = #ffffff
+
+$color_npm_bg           = #c12127
+$color_npm_fg           = #ffffff
+
+$color_docker_hub_bg    = #ffffff
+$color_docker_hub_fg    = #22354c
+
+$color_headhunter_bg    = #d71920
+$color_headhunter_fg    = #ffffff
 
 /** Init */
 if $font_main == "Roboto"
@@ -81,6 +105,113 @@ a
 
   &:after
     clear: both
+
+/** Cards */
+.card-list
+  width: auto
+  
+  margin: 0 14px
+
+.card-item
+  width: (100% / 2)
+
+  float: left
+
+  @media (max-width: $screen_lg_max)
+    width: (100% / 2)
+
+  @media (max-width: $screen_sm_max)
+    width: 100%
+
+  > .content
+    @extend $block-shadow
+    
+    display: block
+
+    margin: $card_margin
+    padding: $card_padding
+
+    background-image: urlBase64("src/images/card-bg.png")
+    background-color: $color_white
+    
+    color: $color_black
+    
+    text-decoration: none
+    
+    border-radius: 2px
+    
+    overflow: hidden
+    
+    cursor: pointer
+    
+    > .icon
+      transition: transform 0.1s linear
+    
+    &:hover,
+    &:focus
+      > .icon
+        transform: scale(1.1)
+
+    > .icon
+      width: 256px
+      height: 256px
+      
+      margin: auto
+
+      background-size: contain
+      background-repeat: no-repeat
+      background-position: center
+
+      @media (max-width: $screen_md_max)
+        width: (100% / 2)
+
+      @media (max-width: $screen_sm_max)
+        width: 128px
+        height: 128px
+
+    &.-habrahabr
+      background-color: $color_habrahabr_bg
+      
+      color: $color_habrahabr_fg
+      
+      > .icon
+        background-image: urlBase64("src/images/logo/habrahabr.png")
+
+    &.-github
+      > .icon
+        background-image: urlBase64("src/images/logo/github.png")
+    
+    &.-twitter
+      background-color: $color_twitter_bg
+      
+      color: $color_twitter_fg
+      
+      > .icon
+        background-image: urlBase64("src/images/logo/twitter.png")
+
+    &.-npm
+      background-color: $color_npm_bg
+      
+      color: $color_npm_fg
+      
+      > .icon
+        background-image: urlBase64("src/images/logo/npm.png")
+      
+    &.-docker-hub
+      background-color: $color_docker_hub_bg
+      
+      color: $color_docker_hub_fg
+      
+      > .icon
+        background-image: urlBase64("src/images/logo/docker.png")
+      
+    &.-headhunter
+      background-color: $color_headhunter_bg
+      
+      color: $color_headhunter_fg
+      
+      > .icon
+        background-image: urlBase64("src/images/logo/headhunter.png")
 
 /** Footer */
 .footer

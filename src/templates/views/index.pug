@@ -1,4 +1,57 @@
 extends ../layouts/default.pug
 
 block content
-  h1= title
+  .card-list._clearfix
+    if links.github
+      .card-item
+        a.content.-github(
+          title=links.github.name
+          href=links.github.url
+        )
+          .icon
+          //- .name GitHub
+
+    if links.habrahabr
+      .card-item
+        a.content.-habrahabr(
+          title=links.habrahabr.name
+          href=links.habrahabr.url
+        )
+          .icon
+          //- .name Habrahabr
+
+    if links.twitter
+      .card-item
+        a.content.-twitter(
+          title=links.twitter.name
+          href=links.twitter.url
+        )
+          .icon
+          //- .name Twitter
+
+    if links.npm
+      .card-item
+        a.content.-npm(
+          title=links.npm.name
+          href=links.npm.url
+        )
+          .icon
+          //- .name NPM
+
+    if links.dockerhub
+      .card-item
+        a.content.-docker-hub(
+          title=links.dockerhub.name
+          href=links.dockerhub.url
+        )
+          .icon
+          //- .name Docker Hub
+
+    if links.headhunter
+      .card-item
+        a.content.-headhunter(
+          title=links.headhunter.name
+          href=links.headhunter.url
+        )
+          .icon
+          //- .name HeadHunter

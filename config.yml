@@ -18,6 +18,26 @@ seo:
         card: summary
         site: '@superpaintman'
 
+links:
+    habrahabr:
+        name: "superpaintman"
+        url:  "https://habrahabr.ru/users/superpaintman/"
+    github:
+        name: "SuperPaintman"
+        url:  "https://github.com/SuperPaintman/"
+    # twitter:
+    #     name: ""
+    #     url:  ""
+    npm:
+        name: "SuperPaintman"
+        url:  "https://www.npmjs.com/~superpaintman"
+    dockerhub:
+        name: "superpaintman"
+        url:  "https://hub.docker.com/u/superpaintman/"
+    # headhunter:
+    #     name: ""
+    #     url:  ""
+
 counters:
     google: ""
 
