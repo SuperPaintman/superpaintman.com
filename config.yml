@@ -13,6 +13,7 @@ seo:
     type: website
     url: https://superpaintman.com/
     site_name: superpaintman.com
+    canonical: https://superpaintman.com/
 
     twitter:
         card: summary

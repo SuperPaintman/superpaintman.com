@@ -36,6 +36,13 @@ mixin seo-basic(arguments)
       content= arguments.keywords.join(', ')
     )
 
+  //- Canonical
+  if arguments.canonical
+    link(
+      rel="canonical"
+      href= arguments.canonical
+    )
+
 //- Open Graph
 mixin seo-og(arguments)
   //- Locale
