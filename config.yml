@@ -39,7 +39,8 @@ links:
     #     url:  ""
 
 counters:
-    google: ""
+    yandex: 41936319
+    google: "UA-89780612-1"
 
 footer:
     repo:
