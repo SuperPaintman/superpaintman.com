@@ -18,7 +18,7 @@ seo:
 
     twitter:
         card: summary
-        site: '@superpaintman'
+        site: '@SuperPaintman'
 
 links:
     habrahabr:
@@ -27,9 +27,9 @@ links:
     github:
         name: "SuperPaintman"
         url:  "https://github.com/SuperPaintman/"
-    # twitter:
-    #     name: ""
-    #     url:  ""
+    twitter:
+        name: "SuperPaintman"
+        url:  "https://twitter.com/SuperPaintman"
     npm:
         name: "SuperPaintman"
         url:  "https://www.npmjs.com/~superpaintman"
