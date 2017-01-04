@@ -1,10 +1,10 @@
 //- SEO
 mixin seo(arguments)
-  - var robots_index = arguments.robots.index ? "index" : "noindex"
-  - var robots_follow = arguments.robots.follow ? "follow" : "nofollow"
+  - var robotsIndex = arguments.robots.index ? "index" : "noindex"
+  - var robotsFollow = arguments.robots.follow ? "follow" : "nofollow"
   meta(
     name="robots"
-    content=robots_index + ", " + robots_follow
+    content=robotsIndex + ", " + robotsFollow
   )
 
   +seo-basic(arguments)
