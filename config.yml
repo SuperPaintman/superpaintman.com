@@ -1,18 +1,18 @@
-title: "superpaintman.io"
+title: "superpaintman.com"
 
 seo:
     robots:
         index: true
         follow: true
 
-    title: superpaintman.io
+    title: superpaintman.com
     description: SuperPaintman's jumppad
     keywords:
         - SuperPaintman
     local: en_US
     type: website
-    url: https://superpaintman.io/
-    site_name: superpaintman.io
+    url: https://superpaintman.com/
+    site_name: superpaintman.com
 
     twitter:
         card: summary
@@ -44,8 +44,8 @@ counters:
 footer:
     repo:
         name: GitHub
-        url: https://github.com/SuperPaintman/superpaintman.io
+        url: https://github.com/SuperPaintman/superpaintman.com
 
     license:
         text: "Apache License, Version 2.0"
-        url: https://raw.githubusercontent.com/SuperPaintman/superpaintman.io/master/LICENSE
+        url: https://raw.githubusercontent.com/SuperPaintman/superpaintman.com/master/LICENSE

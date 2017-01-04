@@ -1,7 +1,7 @@
 {
-  "name": "superpaintman.io",
+  "name": "superpaintman.com",
   "version": "0.0.1",
-  "description": "superpaintman.io",
+  "description": "superpaintman.com",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -12,7 +12,7 @@
   "author": {
     "name": "SuperPaintman",
     "email": "SuperPaintmanDeveloper@gmail.com",
-    "url": "https://superpaintman.io/"
+    "url": "https://superpaintman.com/"
   },
   "license": "Apache-2.0",
   "dependencies": {
@@ -36,6 +36,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SuperPaintman/superpaintman.io.git"
+    "url": "git+https://github.com/SuperPaintman/superpaintman.com.git"
   }
 }
