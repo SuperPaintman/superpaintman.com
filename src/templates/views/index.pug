@@ -28,6 +28,19 @@ block content
           .icon
           //- .name Habrahabr
 
+    if links.vkontakte
+      .card-item
+        link(
+          rel="prefetch"
+          href=links.vkontakte.url
+        )
+        a.content.-vkontakte(
+          title=links.vkontakte.name
+          href=links.vkontakte.url
+        )
+          .icon
+          //- .name VK
+
     if links.twitter
       .card-item
         link(

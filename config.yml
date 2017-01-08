@@ -36,6 +36,9 @@ links:
     dockerhub:
         name: "superpaintman"
         url:  "https://hub.docker.com/u/superpaintman/"
+    vkontakte:
+        name: "superpaintman"
+        url:  "https://vk.com/superpaintman"
     # headhunter:
     #     name: ""
     #     url:  ""

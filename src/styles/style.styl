@@ -49,6 +49,9 @@ $color_habrahabr_fg     = #ffffff
 $color_twitter_bg       = #1b95e0
 $color_twitter_fg       = #ffffff
 
+$color_vkontakte_bg     = #507299
+$color_vkontakte_fg     = #ffffff
+
 $color_npm_bg           = #c12127
 $color_npm_fg           = #ffffff
 
@@ -180,7 +183,15 @@ a
     &.-github
       > .icon
         background-image: urlBase64("src/images/logo/github.png")
-    
+
+    &.-vkontakte
+      background-color: $color_vkontakte_bg
+      
+      color: $color_vkontakte_fg
+      
+      > .icon
+        background-image: urlBase64("src/images/logo/vkontakte.png")
+
     &.-twitter
       background-color: $color_twitter_bg
       
