@@ -21,12 +21,15 @@ seo:
         site: '@SuperPaintman'
 
 links:
-    habrahabr:
-        name: "superpaintman"
-        url:  "https://habrahabr.ru/users/superpaintman/"
     github:
         name: "SuperPaintman"
         url:  "https://github.com/SuperPaintman/"
+    habrahabr:
+        name: "superpaintman"
+        url:  "https://habrahabr.ru/users/superpaintman/"
+    vkontakte:
+        name: "superpaintman"
+        url:  "https://vk.com/superpaintman"
     twitter:
         name: "SuperPaintman"
         url:  "https://twitter.com/SuperPaintman"
@@ -36,9 +39,6 @@ links:
     dockerhub:
         name: "superpaintman"
         url:  "https://hub.docker.com/u/superpaintman/"
-    vkontakte:
-        name: "superpaintman"
-        url:  "https://vk.com/superpaintman"
     # headhunter:
     #     name: ""
     #     url:  ""
