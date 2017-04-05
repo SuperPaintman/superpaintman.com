@@ -1,4 +1,4 @@
-/*
+/*!
  * Copyright (C) 2017 SuperPaintman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@
 
 /** Imports */
 // @import "node_modules/bootstrap/dist/css/bootstrap.css"
-@import "node_modules/normalize.css/normalize.css"
+@import "../../node_modules/normalize.css/normalize.css"
 
 /** Values */
 $font_main              = "Roboto"
@@ -73,8 +73,10 @@ $block-shadow
 body
   position: relative
 
+  margin: 0
+
   background-color: $color_main_bg
-  background-image: urlBase64("src/images/background.png")
+  background-image: url("../images/background.png")
   
   color: $color_main_fg
   
@@ -134,7 +136,7 @@ a
     margin: $card_margin
     padding: $card_padding
 
-    background-image: urlBase64("src/images/card-bg.png")
+    background-image: url("../images/card-bg.png")
     background-color: $color_white
     
     color: $color_black
@@ -178,11 +180,11 @@ a
       color: $color_habrahabr_fg
       
       > .icon
-        background-image: urlBase64("src/images/logo/habrahabr.png")
+        background-image: url("../images/logo/habrahabr.png")
 
     &.-github
       > .icon
-        background-image: urlBase64("src/images/logo/github.png")
+        background-image: url("../images/logo/github.png")
 
     &.-vkontakte
       background-color: $color_vkontakte_bg
@@ -190,7 +192,7 @@ a
       color: $color_vkontakte_fg
       
       > .icon
-        background-image: urlBase64("src/images/logo/vkontakte.png")
+        background-image: url("../images/logo/vkontakte.png")
 
     &.-twitter
       background-color: $color_twitter_bg
@@ -198,7 +200,7 @@ a
       color: $color_twitter_fg
       
       > .icon
-        background-image: urlBase64("src/images/logo/twitter.png")
+        background-image: url("../images/logo/twitter.png")
 
     &.-npm
       background-color: $color_npm_bg
@@ -206,7 +208,7 @@ a
       color: $color_npm_fg
       
       > .icon
-        background-image: urlBase64("src/images/logo/npm.png")
+        background-image: url("../images/logo/npm.png")
       
     &.-dockerhub
       background-color: $color_docker_hub_bg
@@ -214,7 +216,7 @@ a
       color: $color_docker_hub_fg
       
       > .icon
-        background-image: urlBase64("src/images/logo/docker.png")
+        background-image: url("../images/logo/docker.png")
       
     &.-headhunter
       background-color: $color_headhunter_bg
@@ -222,7 +224,7 @@ a
       color: $color_headhunter_fg
       
       > .icon
-        background-image: urlBase64("src/images/logo/headhunter.png")
+        background-image: url("../images/logo/headhunter.png")
 
 /** Footer */
 .footer

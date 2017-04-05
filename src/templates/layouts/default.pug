@@ -2,8 +2,8 @@ include ../mixins/index.pug
 
 doctype html
 html(
-  lang= lang || "en"
-  prefix= seo ? "og: http://ogp.me/ns#" : null
+  lang= htmlWebpackPlugin.options.lang || "en"
+  prefix= htmlWebpackPlugin.options.seo ? "og: http://ogp.me/ns#" : null
   )
   //- HTML HEADER
   head
@@ -11,29 +11,21 @@ html(
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
 
-    title= title
+    title= htmlWebpackPlugin.options.title
 
     //- SEO
-    if seo
-      +seo(seo)
+    if htmlWebpackPlugin.options.seo
+      +seo(htmlWebpackPlugin.options.seo)
 
     //- Icons
-    if icons
-      +icon(icons)
+    if htmlWebpackPlugin.options.icons
+      +icon(htmlWebpackPlugin.options.icons)
 
     block head
   body
     block content
 
-    //- CSS
-    style(
-      id= "css-index"
-      media="all"
-    )
-      include:stylus:clean-css ../../styles/style.styl
-
     //- Counters
-    if counters
-      +counter(counters)
+    if htmlWebpackPlugin.options.counters
+      +counter(htmlWebpackPlugin.options.counters)
 
-    include ../includes/footer.pug

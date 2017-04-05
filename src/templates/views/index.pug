@@ -1,17 +1,4 @@
 extends ../layouts/default.pug
 
 block content
-  .card-list._clearfix
-    each link, name in links
-      .card-item
-        link(
-          rel="prefetch"
-          href=link.url
-        )
-        a.content(
-          class= "-" + name
-          title=link.name
-          href=link.url
-        )
-          .icon
-          //- .name= name
+  #root
