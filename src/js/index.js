@@ -61,7 +61,7 @@ export class CardItem extends React.Component {
     return (
       <div className="card-item">
         <link rel="prefetch" href={url}/>
-        <a className={['content', '-' + name].join(' ')} title={username} href={url}>
+        <a className={['content', `-${name}`].join(' ')} title={username} href={url}>
           <div className="icon"></div>
         </a>
       </div>
@@ -74,9 +74,9 @@ export class CardList extends React.Component {
     const { links } = this.props;
 
     return (
-      <div className="card-list _clearfix">{
-        map(links, (link, key) => <CardItem key={key} name={key} url={link.url} username={link.name}/>)
-      }</div>
+      <div className="card-list _clearfix">
+        {map(links, (link, key) => <CardItem key={key} name={key} url={link.url} username={link.name}/>)}
+      </div>
     );
   }
 }
