@@ -158,7 +158,7 @@ module.exports = {
         test: (path) => path.indexOf(imagesPath) === 0,
         loader: 'file-loader',
         options: {
-          name: `[path][name]${onlyProd(() => '.[sha256:hash]', () => '')}.[ext]`
+          name: `images/[name]${onlyProd(() => '.[sha256:hash]', () => '')}.[ext]`
         }
       },
 
