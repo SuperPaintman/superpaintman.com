@@ -91,6 +91,9 @@ module.exports = {
       }
     }),
 
+    /** Hot Module Replacement */
+    onlyDev(() => new webpack.HotModuleReplacementPlugin()),
+
     /** JavaScript */
     onlyProd(() => new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -131,6 +134,7 @@ module.exports = {
   ]),
   devServer: {
     contentBase: outputPath,
+    hot: true,
     compress: true,
     port: 8080,
     inline: true,
@@ -175,7 +179,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use: filterNull([
+          onlyDev(() => ({ loader: 'react-hot-loader' })),
+          { loader: 'babel-loader' }
+        ])
       }
     ]
   }
