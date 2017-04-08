@@ -12,6 +12,8 @@ tmp/
 # Builds
 public/
 
+api/
+
 # Tests
 coverage/
 
