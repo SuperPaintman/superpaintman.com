@@ -25,7 +25,7 @@ export default class CardList extends Component<ICardListProps, undefined> {
     const { links } = this.props;
 
     return (
-      <div className="card-list _clearfix">
+      <div className='card-list _clearfix'>
         {map(links, (link, key) => <CardItem key={key} name={key} url={link.url} username={link.name}/>)}
       </div>
     );
