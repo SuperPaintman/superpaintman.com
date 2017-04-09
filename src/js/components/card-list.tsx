@@ -1,13 +1,26 @@
 'use strict';
 /** Imports */
-import React, { Component } from 'react';
+import * as React           from 'react';
+import { Component }        from 'react';
 
 import CardItem             from './card-item';
 
 import map                  from '../utils/map';
 
 
-export default class CardList extends Component {
+/** Interfaces */
+export interface ICardListProps {
+  links: {
+    [key: string]: {
+      name: string;
+      url:  string;
+    };
+  };
+}
+
+
+/** Component */
+export default class CardList extends Component<ICardListProps, undefined> {
   render() {
     const { links } = this.props;
 

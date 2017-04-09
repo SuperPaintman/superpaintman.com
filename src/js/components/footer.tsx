@@ -1,9 +1,24 @@
 'use strict';
 /** Imports */
-import React, { Component } from 'react';
+import * as React    from 'react';
+import { Component } from 'react';
 
 
-export default class Footer extends Component {
+/** Interfaces */
+export interface IFooterProps {
+  repo: {
+    name:       string;
+    url:        string;
+  };
+  license: {
+    text:       string;
+    url:        string;
+  };
+}
+
+
+/** Component */
+export default class Footer extends Component<IFooterProps, undefined> {
   render() {
     const { license, repo } = this.props;
 

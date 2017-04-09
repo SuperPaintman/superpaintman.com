@@ -23,6 +23,7 @@ const webpack               = require('webpack');
 const CleanWebpackPlugin    = require('clean-webpack-plugin');
 const HtmlWebpackPlugin     = require('html-webpack-plugin');
 const ExtractTextPlugin     = require('extract-text-webpack-plugin');
+const { CheckerPlugin }     = require('awesome-typescript-loader');
 const ImageminPlugin        = require('imagemin-webpack-plugin').default;
 
 const yaml                  = require('js-yaml');
@@ -64,7 +65,7 @@ const onlyDev = (fn, fall) => only(!IS_PRODUCTION, fn, fall);
 
 module.exports = {
   entry: {
-    main: path.join(__dirname, 'src/js/index.js')
+    main: path.join(__dirname, 'src/js/index.tsx')
   },
   output: {
     path: outputPath,
@@ -75,7 +76,7 @@ module.exports = {
   },
   devtool: onlyDev(() => 'source-map', () => ''),
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
       styles: stylesPath
     }
@@ -104,6 +105,9 @@ module.exports = {
 
     /** Clean */
     new CleanWebpackPlugin([outputPath]),
+
+    /** TypeScript */
+    new CheckerPlugin(),
 
     /** Images */
     onlyProd(() => new ImageminPlugin({
@@ -177,11 +181,16 @@ module.exports = {
 
       /** JavaScript */
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         use: filterNull([
           onlyDev(() => ({ loader: 'react-hot-loader' })),
-          { loader: 'babel-loader' }
+          {
+            loader: 'awesome-typescript-loader',
+            options: {
+              useBabel: true
+            }
+          }
         ])
       }
     ]

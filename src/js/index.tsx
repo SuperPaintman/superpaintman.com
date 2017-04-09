@@ -18,16 +18,16 @@
 import 'whatwg-fetch';
 import 'babel-polyfill';
 
-import React        from 'react';
-import ReactDOM     from 'react-dom';
+import * as React     from 'react';
+import * as ReactDOM  from 'react-dom';
 
-import Root         from './components/root';
+import Root           from './components/root';
 
 import 'styles/style.styl';
 
 
 /** Boot */
-if (!module.parent && typeof global.document !== 'undefined') {
+if (!module.parent && typeof (global as any).document !== 'undefined') {
   ReactDOM.render(
     <Root locals={LOCALS}/>,
     document.getElementById('root')

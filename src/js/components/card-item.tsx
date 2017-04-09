@@ -1,9 +1,19 @@
 'use strict';
 /** Imports */
-import React, { Component } from 'react';
+import * as React    from 'react';
+import { Component } from 'react';
 
 
-export default class CardItem extends Component {
+/** Interfaces */
+export interface ICardItemProps {
+  name:       string;
+  username:   string;
+  url:        string;
+}
+
+
+/** Component */
+export default class CardItem extends Component<ICardItemProps, undefined> {
   render() {
     const { name, username, url } = this.props;
 

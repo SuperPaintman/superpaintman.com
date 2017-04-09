@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "sourceMap": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "pretty": true
+  },
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./node_modules/@types/**/*.ts"
+  ]
+}

@@ -1,12 +1,20 @@
 'use strict';
 /** Imports */
-import React, { Component } from 'react';
+import * as React           from 'react';
+import { Component }        from 'react';
 
 import CardList             from './card-list';
 import Footer               from './footer';
 
 
-export default class Root extends Component {
+/** Interfaces */
+export interface IRootProps {
+  locals: ILocals;
+}
+
+
+/** Component */
+export default class Root extends Component<IRootProps, undefined> {
   render() {
     const { links, footer } = this.props.locals;
     const { license, repo } = footer;
