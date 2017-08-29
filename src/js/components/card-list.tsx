@@ -23,10 +23,9 @@ export interface ICardListProps {
 export default class CardList extends Component<ICardListProps, undefined> {
   render() {
     const { links } = this.props;
-
     return (
-      <div className='card-list _clearfix'>
-        {map(links, (link, key) => <CardItem key={key} name={key} url={link.url} username={link.name}/>)}
+      <div className='card-list'>
+        {map(links, (link, key) => <CardItem key={key} name={key} url={link.url} title={link.title} username={link.name}/>)}
       </div>
     );
   }

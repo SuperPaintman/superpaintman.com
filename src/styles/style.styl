@@ -25,12 +25,19 @@
 /** Values */
 $font_main              = "Roboto"
 
-$card_margin            = 14px
-$card_padding           = 14px
+$content_width          = 512px
+$content_margin_top     = 152px
+$content_mobile_margin  = 12px
 
-$screen_sm_max          = 768px
+$avatar_size            = 64px
+
+$card_icon_size         = 32px
+$card_icon_margin       = 8px
+
+$screen_sm_max          = 480px
 $screen_md_max          = 992px
 $screen_lg_max          = 1200px
+$screen_content_max     = $content_width + $content_mobile_margin * 2
 
 $color_white            = #ffffff
 $color_light_grey       = #fafafa
@@ -61,6 +68,9 @@ $color_docker_hub_fg    = #22354c
 $color_headhunter_bg    = #d71920
 $color_headhunter_fg    = #ffffff
 
+$color_linkedin_bg      = #0077b5
+$color_linkedin_fg      = #ffffff
+
 /** Init */
 if $font_main == "Roboto"
   @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,100,300,700&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic")
@@ -68,6 +78,9 @@ if $font_main == "Roboto"
 /** Abstract */
 $block-shadow
   box-shadow: 0 2px 4px rgba($color_black, 0.3)
+
+$block-shadow-small
+  box-shadow: 0px 0px 1px rgba($color_black, 0.1)
 
 /** General */
 body
@@ -77,22 +90,22 @@ body
 
   background-color: $color_main_bg
   background-image: url("../images/background.png")
-  
+
   color: $color_main_fg
-  
+
   font-family: $font_main
 
 a
   color: $color_link_fg
   text-decoration: none
-  
+
   transition: color 0.1s linear
 
   &:hover,
   &:focus
     color: darken($color_link_fg, 10%)
     text-decoration: underline
-  
+
   &:active
     color: darken($color_link_fg, 20%)
     text-decoration: underline
@@ -111,74 +124,152 @@ a
   &:after
     clear: both
 
-/** Cards */
-.card-list
-  width: auto
-  
-  margin: 0 14px
+/** Content */
+.content
+  @extend $block-shadow
 
-.card-item
-  width: (100% / 2)
+  width: 100%
+  max-width: $content_width
 
-  float: left
+  margin: auto
+  margin-top: $content_margin_top
 
-  @media (max-width: $screen_lg_max)
-    width: (100% / 2)
+  background: $color_white
+
+  color: $color_black
+
+  border-radius: 3px
+
+  @media (max-width: $screen_content_max)
+    width: auto
+
+    margin: 0 $content_mobile_margin
+
+  @media (max-width: $screen_md_max)
+    margin-top: round($content_margin_top * 0.8)
 
   @media (max-width: $screen_sm_max)
-    width: 100%
+    margin-top: round($content_margin_top * 0.7)
 
-  > .content
-    @extend $block-shadow
-    
+/** Common */
+.line
+  margin-top: 14px
+  margin-bottom: 14px
+
+  border-bottom: solid 1px rgba($color_black, 0.1)
+
+/** Profile */
+.profile
+  > .name
+    text-align: center
+    font-weight: 300
+
+    @media (max-width: $screen_content_max)
+      font-size: 1.6em
+
+    @media (max-width: $screen_sm_max)
+      font-size: 1.3em
+
+  > .subtitle
+    text-align: center
+    font-weight: 400
+    font-size: 1.2em
+
+    @media (max-width: $screen_content_max)
+      font-size: 1em
+
+/** Avatar */
+.avatar-container
+  position: relative
+
+  bottom: (152px / 2) + 5px
+
+  margin-bottom: -1 * @bottom
+
+.avatar
+  width:  $avatar_size
+  height: @width
+
+  border-radius: 50%
+
+  margin: auto
+  padding: 5px
+
+  background: $color_white
+
+  overflow: hidden
+
+  > .image
+    border-radius: 50%
+
+    background-color: $color_black
+
+/** Cards */
+.card-list
+  padding: 14px
+
+.card-item
+  margin: 14px 0
+
+  &:first-child
+    margin-top: 0
+
+  &:last-child
+    margin-bottom: 0
+
+  > .card-content
     display: block
 
-    margin: $card_margin
-    padding: $card_padding
+    margin: 0
+    padding: 0
 
     background-image: url("~images/card-bg.png")
     background-color: $color_white
-    
+
     color: $color_black
-    
+
     text-decoration: none
-    
+
     border-radius: 2px
-    
+    border: solid 1px rgba($color_black, 0.2)
+
     overflow: hidden
-    
+
     cursor: pointer
-    
-    > .icon
-      transition: transform 0.1s linear
-    
+
     &:hover,
     &:focus
       > .icon
         transform: scale(1.1)
 
+    > .title
+      margin-left: 8px
+
+      line-height: $card_icon_size + $card_icon_margin * 2
+
+      float: left
+
     > .icon
-      width: 256px
-      height: 256px
-      
-      margin: auto
+      width: $card_icon_size
+      height: $card_icon_size
+
+      margin: $card_icon_margin
 
       background-size: contain
       background-repeat: no-repeat
       background-position: center
 
-      @media (max-width: $screen_md_max)
-        width: (100% / 2)
+      transition: transform 0.1s linear
 
-      @media (max-width: $screen_sm_max)
-        width: 128px
-        height: 128px
+      float: left
 
     &.-habrahabr
       background-color: $color_habrahabr_bg
-      
+
+      border: solid 1px darken($color_habrahabr_bg, 0.2)
+
       color: $color_habrahabr_fg
-      
+
       > .icon
         background-image: url("~images/logo/habrahabr.png?size=64")
 
@@ -188,49 +279,68 @@ a
 
     &.-vkontakte
       background-color: $color_vkontakte_bg
-      
+
+      border: solid 1px darken($color_vkontakte_bg, 0.2)
+
       color: $color_vkontakte_fg
-      
+
       > .icon
         background-image: url("~images/logo/vkontakte.png?size=64")
 
     &.-twitter
       background-color: $color_twitter_bg
-      
+
+      border: solid 1px darken($color_twitter_bg, 0.2)
+
       color: $color_twitter_fg
-      
+
       > .icon
         background-image: url("~images/logo/twitter.png?size=64")
 
     &.-npm
       background-color: $color_npm_bg
-      
+
+      border: solid 1px darken($color_npm_bg, 0.2)
+
       color: $color_npm_fg
-      
+
       > .icon
         background-image: url("~images/logo/npm.png?size=64")
 
     &.-dockerhub
       background-color: $color_docker_hub_bg
-      
+
       color: $color_docker_hub_fg
-      
+
       > .icon
         background-image: url("~images/logo/docker.png?size=64")
 
     &.-headhunter
       background-color: $color_headhunter_bg
-      
+
+      border: solid 1px darken($color_headhunter_bg, 0.2)
+
       color: $color_headhunter_fg
-      
+
       > .icon
         background-image: url("~images/logo/headhunter.png?size=64")
+
+    &.-linkedin
+      background-color: $color_linkedin_bg
+
+      border: solid 1px darken($color_linkedin_bg, 0.2)
+
+      color: $color_linkedin_fg
+
+      > .icon
+        background-image: url("~images/logo/linkedin.png?size=64")
 
 /** Footer */
 .footer
   > .wrapper
     margin: 6px 14px
     padding: 6px 14px
-    
+
     text-align: center
+    font-size: 0.8em
     line-height: 2em

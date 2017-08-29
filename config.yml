@@ -22,23 +22,33 @@ seo:
 
 links:
     github:
-        name: "SuperPaintman"
-        url:  "https://github.com/SuperPaintman/"
+        title: "GitHub"
+        name:  "SuperPaintman"
+        url:   "https://github.com/SuperPaintman/"
+    linkedin:
+        title: "LinkedIn"
+        name:  "superpaintman"
+        url:   "https://www.linkedin.com/in/superpaintman/"
     habrahabr:
-        name: "superpaintman"
-        url:  "https://habrahabr.ru/users/superpaintman/"
+        title: "Habrahabr"
+        name:  "superpaintman"
+        url:   "https://habrahabr.ru/users/superpaintman/"
     vkontakte:
-        name: "superpaintman"
-        url:  "https://vk.com/superpaintman"
+        title: "VKontakte"
+        name:  "superpaintman"
+        url:   "https://vk.com/superpaintman"
     twitter:
-        name: "SuperPaintman"
-        url:  "https://twitter.com/SuperPaintman"
+        title: "Twitter"
+        name:  "SuperPaintman"
+        url:   "https://twitter.com/SuperPaintman"
     npm:
-        name: "SuperPaintman"
-        url:  "https://www.npmjs.com/~superpaintman"
+        title: "NPM"
+        name:  "SuperPaintman"
+        url:   "https://www.npmjs.com/~superpaintman"
     dockerhub:
-        name: "superpaintman"
-        url:  "https://hub.docker.com/u/superpaintman/"
+        title: "Docker Hub"
+        name:  "superpaintman"
+        url:   "https://hub.docker.com/u/superpaintman/"
     # headhunter:
     #     name: ""
     #     url:  ""
