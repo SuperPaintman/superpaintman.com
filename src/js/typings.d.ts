@@ -21,8 +21,9 @@ declare interface ILocals {
   };
   links: {
     [key: string]: {
-      name: string;
-      url:  string;
+      title: string;
+      name:  string;
+      url:   string;
     };
   };
   counters: {
@@ -44,3 +45,17 @@ declare interface ILocals {
 declare const IS_PRODUCTION: boolean;
 declare const VERSION: string;
 declare const LOCALS: ILocals;
+
+declare interface IResponsiveLoader  {
+  srcSet: string;
+  images: IResponsiveLoaderImage[];
+  src:    string;
+  width:  number;
+  height: number;
+}
+
+declare interface IResponsiveLoaderImage {
+  path:   string;
+  width:  number;
+  height: number;
+}

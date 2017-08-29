@@ -78,7 +78,8 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
-      styles: stylesPath
+      styles: stylesPath,
+      images: imagesPath
     }
   },
   plugins: filterNull([
@@ -160,10 +161,14 @@ module.exports = {
       /** Images */
       {
         test: (path) => path.indexOf(imagesPath) === 0,
-        loader: 'file-loader',
-        options: {
-          name: `images/[name]${onlyProd(() => '.[sha256:hash]', () => '')}.[ext]`
-        }
+        use: [
+          {
+            loader: 'responsive-loader',
+            options: {
+              name: `images/[name].[width]${onlyProd(() => '.[sha256:hash]', () => '')}.[ext]`
+            }
+          }
+        ]
       },
 
       /** CSS */
