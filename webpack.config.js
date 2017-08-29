@@ -18,6 +18,7 @@
 /** Requires */
 const fs                    = require('fs');
 const path                  = require('path');
+const vm                    = require('vm');
 
 const webpack               = require('webpack');
 const CleanWebpackPlugin    = require('clean-webpack-plugin');
@@ -25,6 +26,8 @@ const HtmlWebpackPlugin     = require('html-webpack-plugin');
 const ExtractTextPlugin     = require('extract-text-webpack-plugin');
 const { CheckerPlugin }     = require('awesome-typescript-loader');
 const ImageminPlugin        = require('imagemin-webpack-plugin').default;
+
+const { renderToString }    = require('react-dom/server');
 
 const yaml                  = require('js-yaml');
 
@@ -63,6 +66,39 @@ const onlyProd = (fn, fall) => only(IS_PRODUCTION, fn, fall);
 const onlyDev = (fn, fall) => only(!IS_PRODUCTION, fn, fall);
 
 
+/** Plugins */
+class HtmlWebpackReactPlugin {
+  apply(compiler) {
+    compiler.plugin('compilation', (compilation) => {
+      compilation.plugin('html-webpack-plugin-before-html-processing', (htmlPluginData, callback) => {
+        const sandbox = {
+          module: { exports: { } },
+          exports: { }
+        };
+
+        const assetName = Object.keys(compilation.assets)
+          .find((name) => /\bmain\b.*\.js$/.test(name));
+
+        const script = new vm.Script(compilation.assets[assetName].source());
+
+        const context = new vm.createContext(sandbox);
+
+        script.runInContext(context);
+
+        htmlPluginData.html = htmlPluginData.html.replace(
+          '<div id="root"></div>',
+          `<div id="root">${
+            renderToString(context.module.exports.default())
+          }</div>`
+        );
+
+        callback(null, htmlPluginData);
+      });
+    });
+  }
+}
+
+
 module.exports = {
   entry: {
     main: path.join(__dirname, 'src/js/index.tsx')
@@ -72,7 +108,8 @@ module.exports = {
     filename: `js/[name]${onlyProd(() => '.[chunkhash]', () => '')}.js`,
     chunkFilename: `js/[name]${onlyProd(() => '.[chunkhash]', () => '')}.chunk.js`,
     sourceMapFilename: '[file].map',
-    publicPath: '/'
+    publicPath: '/',
+    libraryTarget: 'umd'
   },
   devtool: onlyDev(() => 'source-map', () => ''),
   resolve: {
@@ -122,6 +159,7 @@ module.exports = {
       seo:      locals.seo,
       template: templatePath
     }),
+    onlyProd(() => new HtmlWebpackReactPlugin()),
 
     /** CSS */
     new ExtractTextPlugin({

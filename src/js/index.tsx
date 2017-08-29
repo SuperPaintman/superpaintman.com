@@ -34,3 +34,6 @@ if (!module.parent && typeof (global as any).document !== 'undefined') {
   );
 }
 
+
+/** Export */
+export default () => <Root locals={LOCALS}/>;
