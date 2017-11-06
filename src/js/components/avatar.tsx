@@ -34,7 +34,7 @@ export default class Avatar extends Component<IAvatarProps, undefined> {
           width={size}
           height={size}
           src={src}
-          alt="Avatar"
+          alt='Avatar'
           />
       </div>
     );
