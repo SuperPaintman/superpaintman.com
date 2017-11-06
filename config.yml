@@ -33,6 +33,10 @@ links:
         title: "Habrahabr"
         name:  "superpaintman"
         url:   "https://habrahabr.ru/users/superpaintman/"
+    medium:
+        title: "Medium"
+        name:  "SuperPaintman"
+        url:   "https://medium.com/@SuperPaintman"
     vkontakte:
         title: "VKontakte"
         name:  "superpaintman"
