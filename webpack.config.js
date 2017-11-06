@@ -37,6 +37,7 @@ const p                     = require('./package.json');
 /** Constants */
 const IS_PRODUCTION     = process.env.NODE_ENV === 'production';
 
+const appPath           = path.join(__dirname, 'src/js');
 const stylesPath        = path.join(__dirname, 'src/styles/');
 const imagesPath        = path.join(__dirname, 'src/images/');
 
@@ -101,7 +102,7 @@ class HtmlWebpackReactPlugin {
 
 module.exports = {
   entry: {
-    main: path.join(__dirname, 'src/js/index.tsx')
+    main: path.join(appPath, 'index.tsx')
   },
   output: {
     path: outputPath,
@@ -116,7 +117,8 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
       styles: stylesPath,
-      images: imagesPath
+      images: imagesPath,
+      '~':    appPath
     }
   },
   plugins: filterNull([

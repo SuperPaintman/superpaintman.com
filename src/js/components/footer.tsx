@@ -14,15 +14,20 @@ export interface IFooterProps {
     text:       string;
     url:        string;
   };
+  now?: Date;
 }
 
 
 /** Component */
 export default class Footer extends Component<IFooterProps, undefined> {
   render() {
-    const { license, repo } = this.props;
+    const {
+      license,
+      repo,
+      now = new Date()
+    } = this.props;
 
-    const dateNow = new Date().getFullYear();
+    const dateNow = now.getFullYear();
 
     return (
       <footer className='footer'>

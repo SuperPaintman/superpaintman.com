@@ -7,7 +7,11 @@
     "sourceMap": true,
     "removeComments": false,
     "noImplicitAny": false,
-    "pretty": true
+    "pretty": true,
+    "baseUrl": "./src/js",
+    "paths": {
+      "~/*": ["./*"]
+    }
   },
   "include": [
     "./src/**/*.ts",

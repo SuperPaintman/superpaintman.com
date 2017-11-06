@@ -3,15 +3,16 @@
 import * as React           from 'react';
 import { Component }        from 'react';
 
-import Avatar               from './avatar';
-import CardList             from './card-list';
-import Footer               from './footer';
+import Avatar               from '~/components/avatar';
+import CardList             from '~/components/card-list';
+import Footer               from '~/components/footer';
 
 
 /** Interfaces */
 export interface IRootProps {
   locals: ILocals;
 }
+
 
 /** Constants */
 const AVATAR_SIZE = 152;
@@ -28,6 +29,7 @@ export default class Root extends Component<IRootProps, undefined> {
   render() {
     const { links, footer } = this.props.locals;
     const { license, repo } = footer;
+    const now = new Date();
 
     return (
       <div className='container'>
@@ -48,7 +50,7 @@ export default class Root extends Component<IRootProps, undefined> {
           <CardList links={links}/>
         </div>
 
-        <Footer license={license} repo={repo}/>
+        <Footer license={license} repo={repo} now={now} />
       </div>
     );
   }

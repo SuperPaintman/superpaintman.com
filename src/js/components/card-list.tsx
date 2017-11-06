@@ -3,9 +3,9 @@
 import * as React           from 'react';
 import { Component }        from 'react';
 
-import CardItem             from './card-item';
+import CardItem             from '~/components/card-item';
 
-import map                  from '../utils/map';
+import map                  from '~/utils/map';
 
 
 /** Interfaces */

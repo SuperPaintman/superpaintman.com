@@ -21,19 +21,20 @@ import 'babel-polyfill';
 import * as React     from 'react';
 import * as ReactDOM  from 'react-dom';
 
-import Root           from './components/root';
+import Root           from '~/containers/root';
 
 import 'styles/style.styl';
 
 
+/** Init */
+const main = () => <Root locals={LOCALS}/>;
+
+
 /** Boot */
 if (!module.parent && typeof (global as any).document !== 'undefined') {
-  ReactDOM.render(
-    <Root locals={LOCALS}/>,
-    document.getElementById('root')
-  );
+  ReactDOM.render(main(), document.getElementById('root'));
 }
 
 
 /** Export */
-export default () => <Root locals={LOCALS}/>;
+export default main;
