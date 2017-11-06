@@ -37,7 +37,7 @@ export default class Root extends Component<IRootProps, undefined> {
               <Avatar src={avatar.src} size={AVATAR_SIZE}/>
             </div>
 
-            <h1 className='name'>ALEXANDER KRIVOSHCHEKOV</h1>
+            <h1 className='name'>ALEKSANDR KRIVOSHCHEKOV</h1>
             <h2 className='subtitle'>
               Fullstack developer. Native JavaScript speacker.
             </h2>
