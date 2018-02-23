@@ -41,7 +41,7 @@ export default class Root extends Component<IRootProps, undefined> {
 
             <h1 className='name'>ALEKSANDR KRIVOSHCHEKOV</h1>
             <h2 className='subtitle'>
-              Fullstack developer. Native JavaScript speacker.
+              Fullstack developer. Native JavaScript speaker.
             </h2>
           </div>
 
