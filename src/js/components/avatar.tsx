@@ -20,6 +20,7 @@ export default class Avatar extends Component<IAvatarProps, undefined> {
   render() {
     const { src } = this.props;
     const size = this.props.size || AVATAR_SIZE;
+    const alt = 'Aleksandr Krivoshchekov\'s (SuperPaintman) Avatar';
 
     return (
       <div
@@ -34,7 +35,7 @@ export default class Avatar extends Component<IAvatarProps, undefined> {
           width={size}
           height={size}
           src={src}
-          alt='Avatar'
+          alt={alt}
           />
       </div>
     );
