@@ -26,6 +26,7 @@ const HtmlWebpackPlugin     = require('html-webpack-plugin');
 const ExtractTextPlugin     = require('extract-text-webpack-plugin');
 const { CheckerPlugin }     = require('awesome-typescript-loader');
 const ImageminPlugin        = require('imagemin-webpack-plugin').default;
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const { renderToString }    = require('react-dom/server');
 
@@ -44,6 +45,7 @@ const imagesPath        = path.join(__dirname, 'src/images/');
 const outputPath        = path.join(__dirname, 'public');
 
 const templatePath      = path.join(__dirname, 'src/templates/views/index.pug');
+const faviconPath       = path.join(imagesPath, 'favicon.png');
 
 const locals = yaml.load(
   fs.readFileSync(path.join(__dirname, './config.yml')).toString()
@@ -162,6 +164,28 @@ module.exports = {
       template: templatePath
     }),
     onlyProd(() => new HtmlWebpackReactPlugin()),
+
+    /** Favicons */
+    new FaviconsWebpackPlugin({
+      logo:            faviconPath,
+      prefix:          'icons/[hash]/',
+      persistentCache: false,
+      inject:          true,
+      background:      locals.seo.theme_color,
+      title:           locals.title,
+      icons: {
+        android:      true,
+        appleIcon:    true,
+        appleStartup: true,
+        coast:        true,
+        favicons:     true,
+        firefox:      true,
+        opengraph:    true,
+        twitter:      true,
+        yandex:       true,
+        windows:      true
+      }
+    }),
 
     /** CSS */
     new ExtractTextPlugin({
