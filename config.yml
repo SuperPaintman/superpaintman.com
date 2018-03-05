@@ -1,18 +1,29 @@
-title: "superpaintman.com"
+title: &title Aleksandr Krivoshchekov (SuperPaintman) - superpaintman.com
 
 seo:
     robots:
         index: true
         follow: true
 
-    title: superpaintman.com
-    description: SuperPaintman's jumppad
+    title: *title
+    description: SuperPaintman's jumppad. Aleksandr Krivoshchekov's personal site.
     keywords:
         - SuperPaintman
+        - Aleksandr Krivoshchekov
+        - Krivoshchekov
+        # Typos, mistakes and aliases
+        # Yes, my first name is `Aleksandr` not `Alexander` :)
+        # Yes, my last name is `Krivoshchekov` not `Krivoshhekov` :)
+        - Alex Krivoshchekov
+        - Alexander Krivoshchekov
+        - Aleksandr Krivoshhekov
+        - Alex Krivoshhekov
+        - Alexander Krivoshhekov
+        # - Александр Кривощеков
     local: en_US
     type: website
     url: https://superpaintman.com/
-    site_name: superpaintman.com
+    site_name: Aleksandr Krivoshchekov (SuperPaintman)
     canonical: https://superpaintman.com/
     theme_color: "#333333"
 
