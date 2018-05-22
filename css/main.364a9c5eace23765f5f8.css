@@ -667,6 +667,30 @@ a:focus {
 .card-item > .card-content.-medium > .icon {
   background-image: url(/images/medium.64.42863d002bf58ec41ff4a0d9e013ee4cc018a1c7e813cd254526068407fb36f3.png);
 }
+.card-item > .card-content.-email {
+  background-color: #fab013;
+  border: solid 1px #fab012;
+  color: #fff;
+}
+.card-item > .card-content.-email > .icon {
+  background-image: url(/images/email.64.67f98a3b43ed3c288c48fe8ed8aac8c7cf4ef73025ed8659fce83ec95e26f34f.png);
+}
+.card-item > .card-content.-email > .title > .full {
+  display: inline;
+}
+@media (max-width: 480px) {
+  .card-item > .card-content.-email > .title > .full {
+    display: none;
+  }
+}
+.card-item > .card-content.-email > .title > .mobile {
+  display: none;
+}
+@media (max-width: 480px) {
+  .card-item > .card-content.-email > .title > .mobile {
+    display: inline;
+  }
+}
 /** Footer */
 .footer > .wrapper {
   margin: 6px 14px;
