@@ -27,7 +27,7 @@ const avatar: IResponsiveLoader = require(`images/avatar.jpg?{
 /** Component */
 export default class Root extends Component<IRootProps, undefined> {
   render() {
-    const { links, footer } = this.props.locals;
+    const { email, links, footer } = this.props.locals;
     const { license, repo } = footer;
     const now = new Date();
 
@@ -47,7 +47,7 @@ export default class Root extends Component<IRootProps, undefined> {
 
           <div className='line' />
 
-          <CardList links={links}/>
+          <CardList email={email} links={links} />
         </div>
 
         <Footer license={license} repo={repo} now={now} />

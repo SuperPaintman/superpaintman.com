@@ -71,6 +71,9 @@ $color_headhunter_fg    = #ffffff
 $color_linkedin_bg      = #0077b5
 $color_linkedin_fg      = #ffffff
 
+$color_email_bg         = #fab013
+$color_email_fg         = #ffffff
+
 /** Init */
 if $font_main == "Roboto"
   @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,100,300,700&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic")
@@ -338,6 +341,30 @@ a
     &.-medium
       > .icon
         background-image: url("~images/logo/medium.png?size=64")
+
+    &.-email
+      background-color: $color_email_bg
+
+      border: solid 1px darken($color_email_bg, 0.2)
+
+      color: $color_email_fg
+
+      > .icon
+        background-image: url("~images/logo/email.png?size=64")
+
+      > .title
+        > .full
+          display: inline
+
+          @media (max-width: $screen_sm_max)
+            display: none
+
+        > .mobile
+          display: none
+
+          @media (max-width: $screen_sm_max)
+            display: inline
+
 
 /** Footer */
 .footer

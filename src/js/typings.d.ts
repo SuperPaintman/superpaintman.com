@@ -1,5 +1,6 @@
 declare interface ILocals {
   title: string;
+  email: string;
   seo: {
     robots: {
       index:      boolean;
