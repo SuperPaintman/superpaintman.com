@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
-    "lint": "tslint src/js/**/*.{ts,tsx}"
+    "lint": "tslint src/app/**/*.{ts,tsx}"
   },
   "author": {
     "name": "SuperPaintman",

@@ -38,7 +38,7 @@ const p                     = require('./package.json');
 /** Constants */
 const IS_PRODUCTION     = process.env.NODE_ENV === 'production';
 
-const appPath           = path.join(__dirname, 'src/js');
+const appPath           = path.join(__dirname, 'src/app/');
 const stylesPath        = path.join(__dirname, 'src/styles/');
 const imagesPath        = path.join(__dirname, 'src/images/');
 
