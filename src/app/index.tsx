@@ -1,5 +1,5 @@
 /*!
- * Copyright (C) 2017 SuperPaintman
+ * Copyright (C) 2017-2018 SuperPaintman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
