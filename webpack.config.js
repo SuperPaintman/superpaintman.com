@@ -1,5 +1,5 @@
 /*!
- * Copyright (C) 2017 SuperPaintman
+ * Copyright (C) 2017-2018 SuperPaintman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ const webpack               = require('webpack');
 const CleanWebpackPlugin    = require('clean-webpack-plugin');
 const HtmlWebpackPlugin     = require('html-webpack-plugin');
 const ExtractTextPlugin     = require('extract-text-webpack-plugin');
-const { CheckerPlugin }     = require('awesome-typescript-loader');
 const ImageminPlugin        = require('imagemin-webpack-plugin').default;
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
@@ -38,7 +37,7 @@ const p                     = require('./package.json');
 /** Constants */
 const IS_PRODUCTION     = process.env.NODE_ENV === 'production';
 
-const appPath           = path.join(__dirname, 'src/js');
+const appPath           = path.join(__dirname, 'src/app/');
 const stylesPath        = path.join(__dirname, 'src/styles/');
 const imagesPath        = path.join(__dirname, 'src/images/');
 
@@ -104,7 +103,7 @@ class HtmlWebpackReactPlugin {
 
 module.exports = {
   entry: {
-    main: path.join(appPath, 'index.tsx')
+    main: path.join(appPath, 'index.re')
   },
   output: {
     path: outputPath,
@@ -116,7 +115,7 @@ module.exports = {
   },
   devtool: onlyDev(() => 'source-map', () => ''),
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.re', '.ml'],
     alias: {
       styles: stylesPath,
       images: imagesPath,
@@ -147,9 +146,6 @@ module.exports = {
 
     /** Clean */
     new CleanWebpackPlugin([outputPath]),
-
-    /** TypeScript */
-    new CheckerPlugin(),
 
     /** Images */
     onlyProd(() => new ImageminPlugin({
@@ -248,19 +244,10 @@ module.exports = {
         })
       },
 
-      /** JavaScript */
+      /** ReasonML */
       {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: filterNull([
-          onlyDev(() => ({ loader: 'react-hot-loader' })),
-          {
-            loader: 'awesome-typescript-loader',
-            options: {
-              useBabel: true
-            }
-          }
-        ])
+        test: /\.(re|ml)$/,
+        loader: 'bs-loader'
       }
     ]
   }

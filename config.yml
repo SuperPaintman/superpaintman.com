@@ -34,39 +34,48 @@ seo:
         site: '@SuperPaintman'
 
 links:
-    github:
+    -
+        id:    "github"
         title: "GitHub"
         name:  "SuperPaintman"
         url:   "https://github.com/SuperPaintman/"
-    linkedin:
+    -
+        id:    "linkedin"
         title: "LinkedIn"
         name:  "superpaintman"
         url:   "https://www.linkedin.com/in/superpaintman/"
-    habrahabr:
+    -
+        id:    "habrahabr"
         title: "Habrahabr"
         name:  "superpaintman"
         url:   "https://habrahabr.ru/users/superpaintman/"
-    medium:
+    -
+        id:    "medium"
         title: "Medium"
         name:  "SuperPaintman"
         url:   "https://medium.com/@SuperPaintman"
-    vkontakte:
+    -
+        id:    "vkontakte"
         title: "VKontakte"
         name:  "superpaintman"
         url:   "https://vk.com/superpaintman"
-    twitter:
+    -
+        id:    "twitter"
         title: "Twitter"
         name:  "SuperPaintman"
         url:   "https://twitter.com/SuperPaintman"
-    npm:
+    -
+        id:    "npm"
         title: "NPM"
         name:  "SuperPaintman"
         url:   "https://www.npmjs.com/~superpaintman"
-    # dockerhub:
+    # -
+    #     id:    "dockerhub"
     #     title: "Docker Hub"
     #     name:  "superpaintman"
     #     url:   "https://hub.docker.com/u/superpaintman/"
-    # headhunter:
+    # -
+    #     id:   "headhunter"
     #     name: ""
     #     url:  ""
 
