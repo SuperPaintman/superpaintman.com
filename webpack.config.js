@@ -24,7 +24,6 @@ const webpack               = require('webpack');
 const CleanWebpackPlugin    = require('clean-webpack-plugin');
 const HtmlWebpackPlugin     = require('html-webpack-plugin');
 const ExtractTextPlugin     = require('extract-text-webpack-plugin');
-const { CheckerPlugin }     = require('awesome-typescript-loader');
 const ImageminPlugin        = require('imagemin-webpack-plugin').default;
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
@@ -116,7 +115,7 @@ module.exports = {
   },
   devtool: onlyDev(() => 'source-map', () => ''),
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.re', '.ml'],
+    extensions: ['.js', '.jsx', '.re', '.ml'],
     alias: {
       styles: stylesPath,
       images: imagesPath,
@@ -147,9 +146,6 @@ module.exports = {
 
     /** Clean */
     new CleanWebpackPlugin([outputPath]),
-
-    /** TypeScript */
-    new CheckerPlugin(),
 
     /** Images */
     onlyProd(() => new ImageminPlugin({
@@ -246,21 +242,6 @@ module.exports = {
             'stylus-loader'
           ]
         })
-      },
-
-      /** JavaScript */
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: filterNull([
-          onlyDev(() => ({ loader: 'react-hot-loader' })),
-          {
-            loader: 'awesome-typescript-loader',
-            options: {
-              useBabel: true
-            }
-          }
-        ])
       },
 
       /** ReasonML */
