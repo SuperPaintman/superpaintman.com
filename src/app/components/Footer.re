@@ -3,7 +3,7 @@ open Date;
 
 let component = ReasonReact.statelessComponent("Footer");
 
-let make = (~repo: localsFooterRepo, ~license: localsFooterLicense, _children) => {
+let make = (~repo, ~license, _children) => {
   ...component,
   render: _self => {
     let yearsRange =

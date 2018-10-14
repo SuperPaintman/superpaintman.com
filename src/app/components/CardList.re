@@ -2,7 +2,7 @@ open Locals;
 
 let component = ReasonReact.statelessComponent("CardList");
 
-let make = (~email: string, ~links: array(localsLink), _children) => {
+let make = (~email, ~links, _children) => {
   ...component,
   render: _self =>
     <div className="card-list">

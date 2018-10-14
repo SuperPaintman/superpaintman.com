@@ -3,7 +3,7 @@ open Locals;
 let component = ReasonReact.statelessComponent("Root");
 
 let make =
-    (~locals as {email, links, footer: {license, repo}}: locals, _children) => {
+    (~locals as {email, links, footer: {license, repo}}, _children) => {
   ...component,
   render: _self =>
     <div className="container">
