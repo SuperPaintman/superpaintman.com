@@ -1,0 +1,24 @@
+{
+  "name": "superpaintman.com",
+  "version": "0.0.2",
+  "sources": {
+    "dir": "src/app",
+    "subdirs": true
+  },
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
+  "bs-dependencies": [
+    "reason-react"
+  ],
+  "warnings": {
+    "error": "+101"
+  },
+  "namespace": true,
+  "refmt": 3,
+  "reason": {
+    "react-jsx": 2
+  }
+}

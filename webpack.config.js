@@ -104,7 +104,7 @@ class HtmlWebpackReactPlugin {
 
 module.exports = {
   entry: {
-    main: path.join(appPath, 'index.tsx')
+    main: path.join(appPath, 'index.re')
   },
   output: {
     path: outputPath,
@@ -116,7 +116,7 @@ module.exports = {
   },
   devtool: onlyDev(() => 'source-map', () => ''),
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.re', '.ml'],
     alias: {
       styles: stylesPath,
       images: imagesPath,
@@ -261,6 +261,12 @@ module.exports = {
             }
           }
         ])
+      },
+
+      /** ReasonML */
+      {
+        test: /\.(re|ml)$/,
+        loader: 'bs-loader'
       }
     ]
   }

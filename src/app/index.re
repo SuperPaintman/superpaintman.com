@@ -14,27 +14,20 @@
  * limitations under the License.
  */
 
-'use strict';
-import 'whatwg-fetch';
-import 'babel-polyfill';
+open Locals;
 
-import * as React     from 'react';
-import * as ReactDOM  from 'react-dom';
+%bs.raw
+"require('styles/style.styl')";
 
-import Root           from '~/containers/root';
+/* Init */
+let main = () => <Root locals={convertLocals([%bs.raw "LOCALS"])} />;
 
-import 'styles/style.styl';
+/* Boot */
+let isMain: bool = [%bs.raw
+  "!module.parent && typeof global.document !== 'undefined'"
+];
+if (isMain) {
+  ReactDOMRe.renderToElementWithId(main(), "root");
+};
 
-
-/** Init */
-const main = () => <Root locals={LOCALS}/>;
-
-
-/** Boot */
-if (!module.parent && typeof (global as any).document !== 'undefined') {
-  ReactDOM.render(main(), document.getElementById('root'));
-}
-
-
-/** Export */
-export default main;
+let default = main;

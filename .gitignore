@@ -8,9 +8,12 @@ node_modules/
 tmp/
 .gulp-tmp/
 
-
 # Builds
 public/
+.merlin
+.bsb.lock
+lib/
+src/app/**/*.bs.js
 
 # Tests
 coverage/
