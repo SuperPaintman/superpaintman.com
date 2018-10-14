@@ -17,7 +17,7 @@ indent_style = space
 indent_size = 4
 insert_final_newline = false
 
-[*.{js,jsx,ts,tsx}]
+[*.{js,jsx,ts,tsx,re}]
 indent_style = space
 indent_size = 2
 

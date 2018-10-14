@@ -7,8 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
-    "clean": "bsb -clean-world",
-    "lint": "tslint src/app/**/*.{ts,tsx}"
+    "clean": "bsb -clean-world"
   },
   "author": {
     "name": "SuperPaintman",
