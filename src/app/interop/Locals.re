@@ -25,10 +25,17 @@ type localsFooter = {
 };
 
 [@bs.deriving jsConverter]
+type localsContent = {
+  title: string,
+  description: string,
+};
+
+[@bs.deriving jsConverter]
 type locals = {
   title: string,
   email: string,
   seo: unit, /* TODO */
+  content: localsContent,
   links: array(localsLink),
   counters: unit, /* TODO */
   footer: localsFooter,
@@ -37,6 +44,9 @@ type locals = {
 let convertLocals = locals => {
   /* TODO */
   let locals' = localsFromJs(locals);
+  let localsContent': localsContent = [%bs.raw
+    "localsContentFromJs(locals.content)"
+  ];
   let localsLinks': array(localsLink) = [%bs.raw
     "locals.links.map(localsLinkFromJs)"
   ];
@@ -50,6 +60,7 @@ let convertLocals = locals => {
 
   {
     ...locals',
+    content: localsContent',
     links: localsLinks',
     footer:
       /* ...localsFooter', */

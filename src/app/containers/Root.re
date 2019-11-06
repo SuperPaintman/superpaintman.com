@@ -2,7 +2,7 @@ open Locals;
 
 let component = ReasonReact.statelessComponent("Root");
 
-let make = (~locals as {email, links, footer: {license, repo}}, _children) => {
+let make = (~locals as {email, links, content: {title, description}, footer: {license, repo}}, _children) => {
   ...component,
   render: _self =>
     <div className="container">
@@ -10,14 +10,10 @@ let make = (~locals as {email, links, footer: {license, repo}}, _children) => {
         <div className="profile">
           <div className="avatar-container"> <Avatar /> </div>
           <h1 className="name">
-            {ReasonReact.string("ALEKSANDR KRIVOSHCHEKOV")}
+            {ReasonReact.string(title)}
           </h1>
           <h2 className="subtitle">
-            {
-              ReasonReact.string(
-                "Fullstack developer. Native JavaScript speaker.",
-              )
-            }
+            {ReasonReact.string(description)}
           </h2>
         </div>
         <div className="line" />

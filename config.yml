@@ -33,6 +33,10 @@ seo:
         card: summary
         site: '@SuperPaintman'
 
+content:
+    title: ALEKSANDR KRIVOSHCHEKOV
+    description: Fullstack developer. Native JavaScript speaker.
+
 links:
     -
         id:    "github"
@@ -48,7 +52,7 @@ links:
         id:    "habrahabr"
         title: "Habrahabr"
         name:  "superpaintman"
-        url:   "https://habrahabr.ru/users/superpaintman/"
+        url:   "https://habr.com/en/users/superpaintman/"
     -
         id:    "medium"
         title: "Medium"
