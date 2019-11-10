@@ -73,6 +73,11 @@ links:
         title: "Twitter"
         name:  "SuperPaintman"
         url:   "https://twitter.com/SuperPaintman"
+    -
+        id:    "instagram"
+        title: "Instagram"
+        name:  "superpaintman"
+        url:   "https://www.instagram.com/superpaintman/"
     # -
     #     id:    "npm"
     #     title: "NPM"
