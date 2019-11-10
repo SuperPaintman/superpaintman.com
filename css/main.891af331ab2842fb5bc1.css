@@ -691,6 +691,14 @@ a:focus {
     display: inline;
   }
 }
+.card-item > .card-content.-telegram {
+  background-color: #299ed8;
+  border: solid 1px #289ed8;
+  color: #fff;
+}
+.card-item > .card-content.-telegram > .icon {
+  background-image: url(/images/telegram.64.0752a11f7f97ed407c42a570b6169152cebaf4680306d86fef1b91b662c58a3f.png);
+}
 /** Footer */
 .footer > .wrapper {
   margin: 6px 14px;
