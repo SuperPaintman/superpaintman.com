@@ -49,6 +49,11 @@ links:
         name:  "superpaintman"
         url:   "https://www.linkedin.com/in/superpaintman/"
     -
+        id:    "telegram"
+        title: "Telegram"
+        name:  "superpaintman"
+        url:   "https://t.me/superpaintman"
+    -
         id:    "habrahabr"
         title: "Habrahabr"
         name:  "superpaintman"
@@ -58,21 +63,21 @@ links:
         title: "Medium"
         name:  "SuperPaintman"
         url:   "https://medium.com/@SuperPaintman"
-    -
-        id:    "vkontakte"
-        title: "VKontakte"
-        name:  "superpaintman"
-        url:   "https://vk.com/superpaintman"
+    # -
+    #     id:    "vkontakte"
+    #     title: "VKontakte"
+    #     name:  "superpaintman"
+    #     url:   "https://vk.com/superpaintman"
     -
         id:    "twitter"
         title: "Twitter"
         name:  "SuperPaintman"
         url:   "https://twitter.com/SuperPaintman"
-    -
-        id:    "npm"
-        title: "NPM"
-        name:  "SuperPaintman"
-        url:   "https://www.npmjs.com/~superpaintman"
+    # -
+    #     id:    "npm"
+    #     title: "NPM"
+    #     name:  "SuperPaintman"
+    #     url:   "https://www.npmjs.com/~superpaintman"
     # -
     #     id:    "dockerhub"
     #     title: "Docker Hub"

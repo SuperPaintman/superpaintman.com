@@ -74,6 +74,9 @@ $color_linkedin_fg      = #ffffff
 $color_email_bg         = #fab013
 $color_email_fg         = #ffffff
 
+$color_telegram_bg      = #299ed8
+$color_telegram_fg      = #ffffff
+
 /** Init */
 if $font_main == "Roboto"
   @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,100,300,700&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic")
@@ -365,6 +368,15 @@ a
           @media (max-width: $screen_sm_max)
             display: inline
 
+    &.-telegram
+      background-color: $color_telegram_bg
+
+      border: solid 1px darken($color_telegram_bg, 0.2)
+
+      color: $color_telegram_fg
+
+      > .icon
+        background-image: url("~images/logo/telegram.png?size=64")
 
 /** Footer */
 .footer
