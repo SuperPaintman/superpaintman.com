@@ -1,0 +1,66 @@
+/*!
+ * Copyright (C) 2017-2021 SuperPaintman
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* Imports */
+// @import "node_modules/bootstrap/dist/css/bootstrap.css"
+@import "normalize.css/normalize.css"
+@import "config.styl"
+
+/* Init */
+if $font_main == "Roboto"
+  @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,100,300,700&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic")
+
+/* General */
+body
+  position: relative
+
+  margin: 0
+
+  background-color: $color_main_bg
+  background-image: url("~images/background.png")
+
+  color: $color_main_fg
+
+  font-family: $font_main
+
+a
+  color: $color_link_fg
+  text-decoration: none
+
+  transition: color 0.1s linear
+
+  &:hover,
+  &:focus
+    color: darken($color_link_fg, 10%)
+    text-decoration: underline
+
+  &:active
+    color: darken($color_link_fg, 20%)
+    text-decoration: underline
+
+  &:focus
+    outline: 5px auto -webkit-focus-ring-color
+    outline-offset: -2px
+
+/* Helpers */
+._clearfix
+  &:before,
+  &:after
+    content: " "
+    display: table
+
+  &:after
+    clear: both

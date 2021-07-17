@@ -6,14 +6,9 @@ node_modules/
 
 # TMP
 tmp/
-.gulp-tmp/
 
 # Builds
 public/
-.merlin
-.bsb.lock
-lib/
-src/app/**/*.bs.js
 
 # Tests
 coverage/
@@ -21,7 +16,3 @@ coverage/
 # Logs
 logs/
 *.log
-
-# Docs
-docs/
-docs-api/

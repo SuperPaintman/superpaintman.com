@@ -1,5 +1,5 @@
 /*!
- * Copyright (C) 2017-2018 SuperPaintman
+ * Copyright (C) 2017-2021 SuperPaintman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,240 +15,309 @@
  */
 
 'use strict';
-/** Requires */
-const fs                    = require('fs');
-const path                  = require('path');
-const vm                    = require('vm');
+/* Imports */
+const fs = require('fs');
+const path = require('path');
+const vm = require('vm');
 
-const webpack               = require('webpack');
-const CleanWebpackPlugin    = require('clean-webpack-plugin');
-const HtmlWebpackPlugin     = require('html-webpack-plugin');
-const ExtractTextPlugin     = require('extract-text-webpack-plugin');
-const ImageminPlugin        = require('imagemin-webpack-plugin').default;
+const { DefinePlugin } = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
-const { renderToString }    = require('react-dom/server');
+const sveltePreprocess = require('svelte-preprocess');
+const yaml = require('js-yaml');
 
-const yaml                  = require('js-yaml');
+/* Init */
+const mode = process.env.NODE_ENV || 'development';
+const prod = mode === 'production';
+const isWebpackDevServer = process.env.WEBPACK_DEV_SERVER === 'true';
+const ssr = !isWebpackDevServer;
 
-const p                     = require('./package.json');
-
-
-/** Constants */
-const IS_PRODUCTION     = process.env.NODE_ENV === 'production';
-
-const appPath           = path.join(__dirname, 'src/app/');
-const stylesPath        = path.join(__dirname, 'src/styles/');
-const imagesPath        = path.join(__dirname, 'src/images/');
-
-const outputPath        = path.join(__dirname, 'public');
-
-const templatePath      = path.join(__dirname, 'src/templates/views/index.pug');
-const faviconPath       = path.join(imagesPath, 'favicon.png');
+const srcPath = path.join(__dirname, 'src');
+const imagesPath = path.join(__dirname, 'src/images/');
+const outputPath = path.join(__dirname, 'public');
+const faviconPath = path.join(__dirname, 'src/images/favicon.png');
 
 const locals = yaml.load(
   fs.readFileSync(path.join(__dirname, './config.yml')).toString()
 );
 
+/* Helpers */
+function maybeCall(fn) {
+  return typeof fn === 'function' ? fn() : fn;
+}
 
-/** Helpers */
-function filterNull(array) {
-  return array.filter((item) => item !== null);
+function filter(array) {
+  return array.filter((item) => !!item);
 }
 
 function only(isIt, fn, fall) {
   if (!isIt) {
-    return fall !== undefined ? fall() : null;
+    return fall !== undefined ? maybeCall(fall) : null;
   }
 
-  return fn();
+  return maybeCall(fn);
 }
 
-const onlyProd = (fn, fall) => only(IS_PRODUCTION, fn, fall);
-const onlyDev = (fn, fall) => only(!IS_PRODUCTION, fn, fall);
+const onlyProd = (fn, fall) => only(prod, fn, fall);
+const onlyDev = (fn, fall) => only(!prod, fn, fall);
 
+/* Plugins */
+class HtmlWebpackSveltePlugin {
+  constructor(render = false) {
+    this._render = render;
+  }
 
-/** Plugins */
-class HtmlWebpackReactPlugin {
   apply(compiler) {
-    compiler.plugin('compilation', (compilation) => {
-      compilation.plugin('html-webpack-plugin-before-html-processing', (htmlPluginData, callback) => {
-        const sandbox = {
-          module: { exports: { } },
-          exports: { }
-        };
+    compiler.hooks.compilation.tap('HtmlWebpackSveltePlugin', (compilation) => {
+      HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tap(
+        'HtmlWebpackSveltePlugin',
+        (data) => {
+          if (!this._render) {
+            data.html = data.html.replace('$$html$$', '');
+            data.html = data.html.replace('$$css$$', '');
+            data.html = data.html.replace('$$head$$', '');
+            return;
+          }
 
-        const assetName = Object.keys(compilation.assets)
-          .find((name) => /\bmain\b.*\.js$/.test(name));
+          const sandbox = {
+            module: { exports: {} },
+            exports: {}
+          };
+          sandbox.self = sandbox;
+          sandbox.global = sandbox;
 
-        const script = new vm.Script(compilation.assets[assetName].source());
+          const assetName = Object.keys(compilation.assets).find((name) =>
+            /\bserver\.js$/.test(name)
+          );
 
-        const context = new vm.createContext(sandbox);
+          const source = compilation.assets[assetName].source();
 
-        script.runInContext(context);
+          const script = new vm.Script(source);
 
-        htmlPluginData.html = htmlPluginData.html.replace(
-          '<div id="root"></div>',
-          `<div id="root">${
-            renderToString(context.module.exports.default())
-          }</div>`
-        );
+          const context = new vm.createContext(sandbox);
 
-        callback(null, htmlPluginData);
-      });
+          script.runInContext(context);
+
+          const component = context.module.exports.default.render({ locals });
+
+          data.html = data.html.replace('$$html$$', component.html);
+          // data.html = data.html.replace(
+          //   '$$css$$',
+          //   `<style>${component.css.code}</style>`
+          // );
+          data.html = data.html.replace('$$css$$', '');
+          data.html = data.html.replace('$$head$$', component.head);
+        }
+      );
     });
   }
 }
 
-
+/* Config */
 module.exports = {
+  mode,
+  experiments: {
+    layers: true
+  },
   entry: {
-    main: path.join(appPath, 'index.re')
+    main: {
+      import: path.join(srcPath, 'index.ts'),
+      layer: 'client'
+    },
+    ...(ssr && {
+      server: {
+        import: path.join(srcPath, 'index.ts'),
+        layer: 'server'
+      }
+    })
   },
   output: {
     path: outputPath,
-    filename: `js/[name]${onlyProd(() => '.[chunkhash]', () => '')}.js`,
-    chunkFilename: `js/[name]${onlyProd(() => '.[chunkhash]', () => '')}.chunk.js`,
+    filename(pathData) {
+      if (pathData.chunk.name === 'server') {
+        return '../tmp/js/[name].js';
+      }
+
+      return `js/[name]${onlyProd('.[chunkhash]', '')}.js`;
+    },
+    chunkFilename(pathData) {
+      if (pathData.chunk.name === 'server') {
+        return '../tmp/js/[name].chunk.js';
+      }
+
+      return `js/[name]${onlyProd('.[chunkhash]', '')}.chunk.js`;
+    },
     sourceMapFilename: '[file].map',
     publicPath: '/',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    globalObject: "typeof self !== 'undefined' ? self : this"
   },
-  devtool: onlyDev(() => 'source-map', () => ''),
+  devtool: onlyDev('source-map', false),
   resolve: {
-    extensions: ['.js', '.jsx', '.re', '.ml'],
     alias: {
-      styles: stylesPath,
+      svelte: path.dirname(require.resolve('svelte/package.json')),
       images: imagesPath,
-      '~':    appPath
-    }
+      '~': srcPath
+    },
+    extensions: ['.ts', '.mjs', '.js', '.svelte'],
+    mainFields: ['svelte', 'browser', 'module', 'main']
   },
-  plugins: filterNull([
-    /** DefinePlugin */
-    new webpack.DefinePlugin({
-      IS_PRODUCTION:  JSON.stringify(IS_PRODUCTION),
-      VERSION:        JSON.stringify(p.version),
-      LOCALS:         JSON.stringify(locals),
-      'process.env': {
-        NODE_ENV:       JSON.stringify(process.env.NODE_ENV)
-      }
+  plugins: filter([
+    /* Define */
+    new DefinePlugin({
+      LOCALS: JSON.stringify(locals)
     }),
 
-    /** Hot Module Replacement */
-    onlyDev(() => new webpack.HotModuleReplacementPlugin()),
+    /* Clean */
+    new CleanWebpackPlugin(),
 
-    /** JavaScript */
-    onlyProd(() => new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      comments: false
-    })),
-
-    /** Clean */
-    new CleanWebpackPlugin([outputPath]),
-
-    /** Images */
-    onlyProd(() => new ImageminPlugin({
-      test: /\.(jpe?g|png|gif|svg)$/
-    })),
-
-    /** Template */
+    /* HTML */
     new HtmlWebpackPlugin({
-      title:    locals.title,
-      counters: locals.counters,
-      seo:      locals.seo,
-      template: templatePath
+      template: path.join(srcPath, 'index.html'),
+      excludeChunks: ['server']
     }),
-    onlyProd(() => new HtmlWebpackReactPlugin()),
+    new HtmlWebpackSveltePlugin(ssr),
 
-    /** Favicons */
+    /* Favicons */
     new FaviconsWebpackPlugin({
-      logo:            faviconPath,
-      prefix:          'icons/[hash]/',
+      logo: faviconPath,
+      prefix: `icons/${onlyProd('[chunkhash]/', '')}`,
       persistentCache: false,
-      inject:          true,
-      background:      locals.seo.theme_color,
-      title:           locals.title,
+      inject: true,
+      background: locals.seo.theme_color,
+      title: locals.title,
       icons: {
-        android:      true,
-        appleIcon:    true,
+        android: true,
+        appleIcon: true,
         appleStartup: true,
-        coast:        true,
-        favicons:     true,
-        firefox:      true,
-        opengraph:    true,
-        twitter:      true,
-        yandex:       true,
-        windows:      true
+        coast: true,
+        favicons: true,
+        firefox: true,
+        opengraph: true,
+        twitter: true,
+        yandex: true,
+        windows: true
       }
     }),
 
-    /** CSS */
-    new ExtractTextPlugin({
-      filename: `css/[name]${onlyProd(() => '.[chunkhash]', () => '')}.css`
-    }),
+    /* CSS */
+    new MiniCssExtractPlugin({
+      filename(pathData) {
+        if (pathData.chunk.name === 'server') {
+          return '../tmp/css/[name].css';
+        }
 
-    /** Chunks */
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   minChunks: (module) => /node_modules/.test(module.resource)
-    // }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'commons'
-    // })
+        return `css/[name]${onlyProd('.[chunkhash]', '')}.css`;
+      },
+      chunkFilename(pathData) {
+        if (pathData.chunk.name === 'server') {
+          return '../tmp/css/[name].chunk.css';
+        }
+
+        return `css/[name]${onlyProd('.[chunkhash]', '')}.chunk.css`;
+      }
+    })
   ]),
-  devServer: {
-    contentBase: outputPath,
-    hot: true,
-    compress: true,
-    port: 8080,
-    inline: true,
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: true,
-      ignored: /node_modules/
-    }
-  },
   module: {
-    rules: [
-      /** Pug */
+    rules: filter([
+      /* TypeScript */
       {
-        test: /\.pug$/,
-        exclude: /node_modules/,
-        loader: 'pug-loader'
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
       },
 
-      /** Images */
+      /* Svelte */
+      ssr && {
+        test: /\.svelte$/,
+        issuerLayer: 'server',
+        use: {
+          loader: 'svelte-loader',
+          options: {
+            compilerOptions: {
+              dev: !prod,
+              generate: 'ssr',
+              hydratable: ssr
+            },
+            emitCss: true,
+            hotReload: !prod,
+            preprocess: sveltePreprocess({ sourceMap: !prod })
+          }
+        }
+      },
+      {
+        test: /\.svelte$/,
+        issuerLayer: 'client',
+        use: {
+          loader: 'svelte-loader',
+          options: {
+            compilerOptions: {
+              dev: !prod,
+              generate: 'dom',
+              hydratable: ssr
+            },
+            // emitCss: prod,
+            emitCss: true, // Responsive loader doesn't work without it.
+            hotReload: !prod,
+            preprocess: sveltePreprocess({ sourceMap: !prod })
+          }
+        }
+      },
+      {
+        // required to prevent errors from Svelte on Webpack 5+
+        test: /node_modules\/svelte\/.*\.mjs$/,
+        resolve: {
+          fullySpecified: false
+        }
+      },
+
+      /* CSS */
+      {
+        test: /\.styl$/,
+        exclude: /node_modules/,
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: 'css-loader' },
+          { loader: 'stylus-loader' }
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [['postcss-css-variables', { preserve: false }]]
+              }
+            }
+          }
+        ]
+      },
+
+      /* Images */
       {
         test: (path) => path.indexOf(imagesPath) === 0,
         use: [
           {
             loader: 'responsive-loader',
             options: {
-              name: `images/[name].[width]${onlyProd(() => '.[sha256:hash]', () => '')}.[ext]`
+              name: `images/[name].[width]${onlyProd(
+                '.[sha256:hash]',
+                ''
+              )}.[ext]`
             }
           }
         ]
-      },
-
-      /** CSS */
-      {
-        test: /\.styl$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            'stylus-loader'
-          ]
-        })
-      },
-
-      /** ReasonML */
-      {
-        test: /\.(re|ml)$/,
-        loader: 'bs-loader'
       }
-    ]
+    ])
+  },
+  devServer: {
+    hot: true
   }
 };

@@ -31,67 +31,56 @@ seo:
 
     twitter:
         card: summary
-        site: '@SuperPaintman'
+        site: "@SuperPaintman"
 
 content:
     title: ALEKSANDR KRIVOSHCHEKOV
     description: Lead Software Engineer
 
 links:
-    -
-        id:    "github"
-        title: "GitHub"
-        name:  "SuperPaintman"
-        url:   "https://github.com/SuperPaintman/"
-    -
-        id:    "linkedin"
-        title: "LinkedIn"
-        name:  "superpaintman"
-        url:   "https://www.linkedin.com/in/superpaintman/"
-    -
-        id:    "telegram"
-        title: "Telegram"
-        name:  "superpaintman"
-        url:   "https://t.me/superpaintman"
-    -
-        id:    "habrahabr"
-        title: "Habrahabr"
-        name:  "superpaintman"
-        url:   "https://habr.com/en/users/superpaintman/"
-    -
-        id:    "medium"
-        title: "Medium"
-        name:  "SuperPaintman"
-        url:   "https://medium.com/@SuperPaintman"
-    # -
-    #     id:    "vkontakte"
-    #     title: "VKontakte"
-    #     name:  "superpaintman"
-    #     url:   "https://vk.com/superpaintman"
-    -
-        id:    "twitter"
-        title: "Twitter"
-        name:  "SuperPaintman"
-        url:   "https://twitter.com/SuperPaintman"
-    -
-        id:    "instagram"
-        title: "Instagram"
-        name:  "superpaintman"
-        url:   "https://www.instagram.com/superpaintman/"
-    # -
-    #     id:    "npm"
-    #     title: "NPM"
-    #     name:  "SuperPaintman"
-    #     url:   "https://www.npmjs.com/~superpaintman"
-    # -
-    #     id:    "dockerhub"
-    #     title: "Docker Hub"
-    #     name:  "superpaintman"
-    #     url:   "https://hub.docker.com/u/superpaintman/"
-    # -
-    #     id:   "headhunter"
-    #     name: ""
-    #     url:  ""
+    - id: "github"
+      title: "GitHub"
+      name: "SuperPaintman"
+      url: "https://github.com/SuperPaintman/"
+    - id: "linkedin"
+      title: "LinkedIn"
+      name: "superpaintman"
+      url: "https://www.linkedin.com/in/superpaintman/"
+    - id: "telegram"
+      title: "Telegram"
+      name: "superpaintman"
+      url: "https://t.me/superpaintman"
+    - id: "habrahabr"
+      title: "Habrahabr"
+      name: "superpaintman"
+      url: "https://habr.com/en/users/superpaintman/"
+    - id: "medium"
+      title: "Medium"
+      name: "SuperPaintman"
+      url: "https://medium.com/@SuperPaintman"
+    # - id: "vkontakte"
+    #   title: "VKontakte"
+    #   name: "superpaintman"
+    #   url: "https://vk.com/superpaintman"
+    - id: "twitter"
+      title: "Twitter"
+      name: "SuperPaintman"
+      url: "https://twitter.com/SuperPaintman"
+    - id: "instagram"
+      title: "Instagram"
+      name: "superpaintman"
+      url: "https://www.instagram.com/superpaintman/"
+    # - id: "npm"
+    #   title: "NPM"
+    #   name: "SuperPaintman"
+    #   url: "https://www.npmjs.com/~superpaintman"
+    # - id: "dockerhub"
+    #   title: "Docker Hub"
+    #   name: "superpaintman"
+    #   url: "https://hub.docker.com/u/superpaintman/"
+    # - id: "headhunter"
+    #   name: ""
+    #   url: ""
 
 counters:
     yandex: 41936319
