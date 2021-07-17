@@ -104,10 +104,11 @@ class HtmlWebpackSveltePlugin {
           const component = context.module.exports.default.render({ locals });
 
           data.html = data.html.replace('$$html$$', component.html);
-          data.html = data.html.replace(
-            '$$css$$',
-            `<style>${component.css.code}</style>`
-          );
+          // data.html = data.html.replace(
+          //   '$$css$$',
+          //   `<style>${component.css.code}</style>`
+          // );
+          data.html = data.html.replace('$$css$$', '');
           data.html = data.html.replace('$$head$$', component.head);
         }
       );
@@ -241,7 +242,7 @@ module.exports = {
               generate: 'ssr',
               hydratable: ssr
             },
-            emitCss: false,
+            emitCss: true,
             hotReload: !prod,
             preprocess: sveltePreprocess({ sourceMap: !prod })
           }
