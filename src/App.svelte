@@ -46,3 +46,65 @@
 </div>
 
 <Counters {...locals.counters} />
+
+<style lang="stylus">
+  @import "./config.styl"
+
+  .content
+    @extend $block-shadow
+
+    width: 100%
+    max-width: $content_width
+
+    margin: auto
+    margin-top: $content_margin_top
+
+    background: $color_white
+
+    color: $color_black
+
+    border-radius: 3px
+
+    @media (max-width: $screen_content_max)
+      width: auto
+
+      margin: 0 $content_mobile_margin
+
+    @media (max-width: $screen_md_max)
+      margin-top: round($content_margin_top * 0.8)
+
+    @media (max-width: $screen_sm_max)
+      margin-top: round($content_margin_top * 0.7)
+
+  .profile
+    > .name
+      text-align: center
+      font-weight: 300
+
+      @media (max-width: $screen_content_max)
+        font-size: 1.6em
+
+      @media (max-width: $screen_sm_max)
+        font-size: 1.3em
+
+    > .subtitle
+      text-align: center
+      font-weight: 400
+      font-size: 1.2em
+
+      @media (max-width: $screen_content_max)
+        font-size: 1em
+
+  .avatar-container
+    position: relative
+
+    bottom: (152px / 2) + 5px
+
+    margin-bottom: -1 * @bottom
+
+  .line
+    margin-top: 14px
+    margin-bottom: 14px
+
+    border-bottom: solid 1px rgba($color_black, 0.1)
+</style>

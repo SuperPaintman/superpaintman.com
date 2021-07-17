@@ -258,7 +258,8 @@ module.exports = {
               generate: 'dom',
               hydratable: ssr
             },
-            emitCss: prod,
+            // emitCss: prod,
+            emitCss: true, // Responsive loader doesn't work without it.
             hotReload: !prod,
             preprocess: sveltePreprocess({ sourceMap: !prod })
           }

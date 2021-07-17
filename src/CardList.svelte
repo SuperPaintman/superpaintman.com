@@ -36,3 +36,10 @@
 
   <CardEmail {email} />
 </div>
+
+<style lang="stylus">
+  @import "./config.styl"
+
+  .card-list
+    padding: 14px
+</style>

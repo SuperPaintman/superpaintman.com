@@ -27,3 +27,27 @@
 <div class="avatar" style={styles({ width: `${size}px`, height: `${size}px` })}>
   <img class="image" width={size} height={size} {src} {alt} />
 </div>
+
+<style lang="stylus">
+  @import "./config.styl"
+
+  $avatar_size = 64px
+
+  .avatar
+    width:  $avatar_size
+    height: @width
+
+    border-radius: 50%
+
+    margin: auto
+    padding: 5px
+
+    background: $color_white
+
+    overflow: hidden
+
+    > .image
+      border-radius: 50%
+
+      background-color: $color_black
+</style>

@@ -52,3 +52,16 @@
     </div>
   </div>
 </footer>
+
+<style lang="stylus">
+  @import "./config.styl"
+
+  .footer
+    > .wrapper
+      margin: 6px 14px
+      padding: 6px 14px
+
+      text-align: center
+      font-size: 0.8em
+      line-height: 2em
+</style>
