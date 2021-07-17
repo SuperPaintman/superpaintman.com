@@ -1,5 +1,5 @@
 /*!
- * Copyright (C) 2017-2018 SuperPaintman
+ * Copyright (C) 2017-2021 SuperPaintman
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,9 @@
  * limitations under the License.
  */
 
-open Locals;
+'use strict';
 
-%bs.raw
-"require('styles/style.styl')";
-
-/* Init */
-let main = () => <Root locals={convertLocals([%bs.raw "LOCALS"])} />;
-
-/* Boot */
-let isMain: bool = [%bs.raw
-  "!module.parent && typeof global.document !== 'undefined'"
-];
-if (isMain) {
-  ReactDOMRe.renderToElementWithId(main(), "root");
-};
-
-let default = main;
+export const styles = (o) =>
+  Object.entries(o)
+    .map(([key, value]) => `${key}:${value}`)
+    .join(';');
