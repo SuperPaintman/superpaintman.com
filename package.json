@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
+    "validate": "svelte-check",
     "dev": "webpack serve --content-base public",
     "clean": "rm -rf ./tmp ./public"
   },
@@ -17,6 +18,8 @@
   "license": "Apache-2.0",
   "dependencies": {},
   "devDependencies": {
+    "@tsconfig/svelte": "1.0.13",
+    "@types/node": "16.3.3",
     "clean-webpack-plugin": "4.0.0-alpha.0",
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
@@ -35,7 +38,12 @@
     "stylus": "0.54.8",
     "stylus-loader": "6.1.0",
     "svelte": "^3.31.2",
+    "svelte-check": "2.2.3",
     "svelte-loader": "^3.0.0",
+    "svelte-preprocess": "4.7.4",
+    "ts-loader": "9.2.3",
+    "tslib": "2.3.0",
+    "typescript": "4.3.5",
     "webpack": "^5.16.0",
     "webpack-cli": "^4.4.0",
     "webpack-dev-server": "^3.11.2"

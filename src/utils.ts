@@ -16,7 +16,10 @@
 
 'use strict';
 
-export const styles = (o) =>
+export const styles = (o: {
+  [key: string]: string | boolean | null | undefined;
+}) =>
   Object.entries(o)
+    .filter(([_key, value]) => !!value)
     .map(([key, value]) => `${key}:${value}`)
     .join(';');

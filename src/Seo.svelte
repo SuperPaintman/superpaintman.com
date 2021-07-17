@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /*!
    * Copyright (C) 2017-2021 SuperPaintman
    *
@@ -15,21 +15,34 @@
    * limitations under the License.
    */
 
-  export let title;
-  export let robots;
-  export let description;
-  export let keywords;
-  export let canonical;
-  export let theme_color;
-  export let locale;
-  export let type;
-  export let url;
-  export let site_name;
-  export let image;
-  export let twitter;
+  type Robots = {
+    index?: boolean;
+    follow?: boolean;
+  };
 
-  $: index = robots.index ? 'index' : 'noindex';
-  $: follow = robots.follow ? 'follow' : 'nofollow';
+  type Twitter = {
+    title?: string;
+    description?: string;
+    image?: string;
+    card?: string;
+    site?: string;
+  };
+
+  export let title: string | undefined = undefined;
+  export let robots: Robots | undefined = undefined;
+  export let description: string | undefined = undefined;
+  export let keywords: string[] | undefined = undefined;
+  export let canonical: string | undefined = undefined;
+  export let theme_color: string | undefined = undefined;
+  export let locale: string | undefined = undefined;
+  export let type: string | undefined = undefined;
+  export let url: string | undefined = undefined;
+  export let site_name: string | undefined = undefined;
+  export let image: string | undefined = undefined;
+  export let twitter: Twitter | undefined = undefined;
+
+  $: index = robots && robots.index ? 'index' : 'noindex';
+  $: follow = robots && robots.follow ? 'follow' : 'nofollow';
 </script>
 
 <svelte:head>

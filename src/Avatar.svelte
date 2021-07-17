@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /*!
    * Copyright (C) 2017-2021 SuperPaintman
    *
@@ -18,7 +18,7 @@
   import { styles } from './utils';
 
   const size = 152;
-  const src = require(`./images/avatar.jpg?{
+  const src: string = require(`./images/avatar.jpg?{
     sizes: [304, 152]
   }`).src;
   const alt = "Aleksandr Krivoshchekov's (SuperPaintman) Avatar";

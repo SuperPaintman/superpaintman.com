@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /*!
    * Copyright (C) 2017-2021 SuperPaintman
    *
@@ -17,12 +17,12 @@
 
   import { protectEmailAlways } from 'protect-email';
 
-  export let email = '';
+  export let email: string;
 
   $: protectedEmail = protectEmailAlways(email);
   $: href = `mailto:${protectedEmail}`;
 
-  const dangerousContent = (href, title) =>
+  const dangerousContent = (href: string, title: string) =>
     `
       <a class="card-content _clearfix -email" title="${title}" href="${href}">
         <div class="icon"></div>

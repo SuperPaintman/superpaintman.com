@@ -22,7 +22,7 @@ import App from './App.svelte';
 
 if (!module.parent && typeof global.document !== 'undefined') {
   new App({
-    target: document.getElementById('root'),
+    target: document.getElementById('root')!,
     props: {
       locals: LOCALS
     }

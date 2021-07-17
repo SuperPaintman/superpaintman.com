@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /*!
    * Copyright (C) 2017-2021 SuperPaintman
    *
@@ -18,8 +18,15 @@
   import CardItem from './CardItem.svelte';
   import CardEmail from './CardEmail.svelte';
 
-  export let email = '';
-  export let links = [];
+  type Link = {
+    id: string;
+    title: string;
+    name: string;
+    url: string;
+  };
+
+  export let email: string;
+  export let links: Link[];
 </script>
 
 <div class="card-list">

@@ -26,6 +26,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
+const sveltePreprocess = require('svelte-preprocess');
 const yaml = require('js-yaml');
 
 /* Init */
@@ -122,12 +123,12 @@ module.exports = {
   },
   entry: {
     main: {
-      import: path.join(srcPath, 'index.js'),
+      import: path.join(srcPath, 'index.ts'),
       layer: 'client'
     },
     ...(ssr && {
       server: {
-        import: path.join(srcPath, 'index.js'),
+        import: path.join(srcPath, 'index.ts'),
         layer: 'server'
       }
     })
@@ -160,7 +161,7 @@ module.exports = {
       images: imagesPath,
       '~': srcPath
     },
-    extensions: ['.mjs', '.js', '.svelte'],
+    extensions: ['.ts', '.mjs', '.js', '.svelte'],
     mainFields: ['svelte', 'browser', 'module', 'main']
   },
   plugins: filter([
@@ -221,6 +222,13 @@ module.exports = {
   ]),
   module: {
     rules: filter([
+      /* TypeScript */
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
+      },
+
       /* Svelte */
       ssr && {
         test: /\.svelte$/,
@@ -234,7 +242,8 @@ module.exports = {
               hydratable: ssr
             },
             emitCss: false,
-            hotReload: !prod
+            hotReload: !prod,
+            preprocess: sveltePreprocess({ sourceMap: !prod })
           }
         }
       },
@@ -250,7 +259,8 @@ module.exports = {
               hydratable: ssr
             },
             emitCss: prod,
-            hotReload: !prod
+            hotReload: !prod,
+            preprocess: sveltePreprocess({ sourceMap: !prod })
           }
         }
       },

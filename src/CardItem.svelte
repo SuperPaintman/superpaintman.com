@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /*!
    * Copyright (C) 2017-2021 SuperPaintman
    *
@@ -15,10 +15,10 @@
    * limitations under the License.
    */
 
-  export let id = '';
-  export let url = '';
-  export let title = '';
-  export let username = '';
+  export let id: string;
+  export let url: string;
+  export let title: string;
+  export let username: string;
 </script>
 
 <div class="card-item">

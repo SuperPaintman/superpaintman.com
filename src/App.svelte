@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /*!
    * Copyright (C) 2017-2021 SuperPaintman
    *
@@ -21,48 +21,7 @@
   import Footer from './Footer.svelte';
   import CardList from './CardList.svelte';
 
-  export let locals = {
-    title: '',
-    email: '',
-    seo: {
-      robots: {
-        index: true,
-        follow: true
-      },
-      title: '',
-      description: '',
-      keywords: [],
-      local: '',
-      type: '',
-      url: '',
-      site_name: '',
-      canonical: '',
-      theme_color: '',
-      twitter: {
-        card: '',
-        site: ''
-      }
-    },
-    content: {
-      title: '',
-      description: ''
-    },
-    links: [],
-    counters: {
-      yandex: 0,
-      google: ''
-    },
-    footer: {
-      repo: {
-        name: '',
-        url: ''
-      },
-      license: {
-        text: '',
-        url: ''
-      }
-    }
-  };
+  export let locals: Locals;
 </script>
 
 <Seo {...locals.seo} />

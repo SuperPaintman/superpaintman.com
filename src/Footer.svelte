@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /*!
    * Copyright (C) 2017-2021 SuperPaintman
    *
@@ -15,18 +15,22 @@
    * limitations under the License.
    */
 
-  export let repo = {
-    name: '',
-    url: ''
+  type Repo = {
+    name: string;
+    url: string;
   };
-  export let license = {
-    text: '',
-    url: ''
+
+  type License = {
+    text: string;
+    url: string;
   };
+
+  export let repo: Repo;
+  export let license: License;
 
   const currentYear = new Date().getFullYear();
   const yearsRange =
-    currentYear === '2017' ? '' + `${currentYear}` : `2017-${currentYear}`;
+    currentYear === 2017 ? '' + `${currentYear}` : `2017-${currentYear}`;
 </script>
 
 <footer class="footer">

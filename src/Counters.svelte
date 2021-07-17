@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /*!
    * Copyright (C) 2017-2021 SuperPaintman
    *
@@ -15,10 +15,10 @@
    * limitations under the License.
    */
 
-  export let yandex = 0;
-  export let google = '';
+  export let yandex: number;
+  export let google: string;
 
-  function yandexMetrika(id) {
+  function yandexMetrika(id: number) {
     return `
       ${'<'}script type="text/javascript"${'>'}
         (function (d, w, c) {
@@ -59,7 +59,7 @@
     `;
   }
 
-  function googleAnalytics(id) {
+  function googleAnalytics(id: string) {
     return `
       ${'<'}script type="text/javascript"${'>'}
         (function (d, w) {
