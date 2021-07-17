@@ -189,6 +189,13 @@ module.exports = {
       inject: true,
       background: locals.seo.theme_color,
       title: locals.title,
+      manifest: {
+        name: locals.seo.title,
+        short_name: locals.seo.title,
+        description: locals.seo.description,
+        background_color: locals.seo.theme_color,
+        theme_color: locals.seo.theme_color
+      },
       icons: {
         android: true,
         appleIcon: true,
