@@ -5,5 +5,10 @@
     "logo": "yandex-browser-50x50.png",
     "color": "#fff",
     "show_title": true
-  }
+  },
+  "name": "Aleksandr Krivoshchekov (SuperPaintman) - superpaintman.com",
+  "short_name": "Aleksandr Krivoshchekov (SuperPaintman) - superpaintman.com",
+  "description": "SuperPaintman's jumppad. Aleksandr Krivoshchekov's personal site.",
+  "background_color": "#333333",
+  "theme_color": "#333333"
 }

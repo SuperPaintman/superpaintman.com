@@ -1,14 +1,14 @@
 {
-  "name": "superpaintman.com",
-  "short_name": "superpaintman.com",
-  "description": "superpaintman.com",
+  "name": "Aleksandr Krivoshchekov (SuperPaintman) - superpaintman.com",
+  "short_name": "Aleksandr Krivoshchekov (SuperPaintman) - superpaintman.com",
+  "description": "SuperPaintman's jumppad. Aleksandr Krivoshchekov's personal site.",
   "dir": "auto",
   "lang": "en-US",
   "display": "standalone",
   "orientation": "any",
   "start_url": "/?homescreen=1",
-  "background_color": "#fff",
-  "theme_color": "#fff",
+  "background_color": "#333333",
+  "theme_color": "#333333",
   "icons": [
     {
       "src": "android-chrome-36x36.png",
