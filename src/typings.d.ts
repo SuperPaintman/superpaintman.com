@@ -63,3 +63,5 @@ declare type ResponsiveLoaderImage = {
   width: number;
   height: number;
 };
+
+declare const IS_SSR: boolean;

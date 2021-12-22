@@ -168,7 +168,8 @@ module.exports = {
   plugins: filter([
     /* Define */
     new DefinePlugin({
-      LOCALS: JSON.stringify(locals)
+      LOCALS: JSON.stringify(locals),
+      IS_SSR: JSON.stringify(ssr)
     }),
 
     /* Clean */
