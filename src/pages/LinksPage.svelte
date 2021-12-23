@@ -170,13 +170,13 @@
   .photo-border {
     position: absolute;
 
-    top: -1 * $photo-border-padding;
-    left: -1 * $photo-border-padding;
+    top: -1 * $photo-border-padding - 2px;
+    left: -1 * $photo-border-padding - 2px;
 
     width: $photo-size + $photo-border-padding * 2;
     height: @width;
 
-    outline: 2px solid #ffffff;
+    border: 2px solid #ffffff;
     border-radius: 50%;
 
     z-index: -1;

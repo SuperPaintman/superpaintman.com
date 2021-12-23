@@ -684,13 +684,13 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     width: 7px;
     height: @width;
 
-    top: 12px - floor(@width / 2);
-    left: -24px - floor(@width / 2);
+    top: 12px - floor(@width / 2) - 1px;
+    left: -24px - floor(@width / 2) - 1px;
 
     // background: $position-dot-color;
     background: #ffffff;
 
-    outline 1px solid $position-dot-color;
+    border: 1px solid $position-dot-color;
     border-radius: 50%;
 
     z-index: 1;
