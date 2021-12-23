@@ -1,5 +1,11 @@
 <nav class="header">
   <div class="container">
+    <div class="blur-box">
+      <div class="blur blur-1" />
+      <div class="blur blur-2" />
+      <div class="blur blur-3" />
+    </div>
+
     <a class="logo" href="/">
       <div class="icon">AK</div>
     </a>
@@ -13,6 +19,15 @@
 </nav>
 
 <style lang="stylus">
+  $blur-base-size = 2px;
+  $blur-radius = 192px;
+  $blur-offset-top = -64px;
+  $blur-offset-top = 0px;
+  $blur-offset-left = 48px;
+  $blur-color-1 = rgba(#ff0044, 0.15);
+  $blur-color-2 = rgba(#6b24ff, 0.15);
+  $blur-color-3 = rgba(#00aaff, 0.15);
+
   .container {
     position: relative;
     display: flex;
@@ -25,6 +40,48 @@
     box-sizing: border-box;
 
     z-index: 100;
+  }
+
+  .blur-box {
+    position: absolute;
+
+    top: $blur-offset-top;
+    left: $blur-offset-left;
+
+    z-index: -1;
+  }
+
+  .blur {
+    position: absolute;
+
+    width: $blur-base-size;
+    height: $blur-base-size;
+
+    border-radius: 50%;
+  }
+
+  .blur-1 {
+    top: 0;
+    left: 0;
+
+    background-color: $blur-color-1;
+    box-shadow: 0 0 ($blur-radius - $blur-base-size / 2) ($blur-radius - $blur-base-size / 2) @background-color;
+  }
+
+  .blur-2 {
+    top: 32px * 5;
+    left: 32px * 4;
+
+    background-color: $blur-color-2;
+    box-shadow: 0 0 ($blur-radius - $blur-base-size / 2) ($blur-radius - $blur-base-size / 2) @background-color;
+  }
+
+  .blur-3 {
+    top: 32px * 2;
+    left: 32px * 10;
+
+    background-color: $blur-color-3;
+    box-shadow: 0 0 ($blur-radius - $blur-base-size / 2) ($blur-radius - $blur-base-size / 2) @background-color;
   }
 
   .logo {

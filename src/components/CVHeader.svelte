@@ -6,12 +6,6 @@
 </script>
 
 <div class="header">
-  <div class="blur-box">
-    <div class="blur blur-1" />
-    <div class="blur blur-2" />
-    <div class="blur blur-3" />
-  </div>
-
   <div class="container">
     <div class="left-side">
       <div class="fullname">Aleksandr Krivoshchekov</div>
@@ -67,62 +61,12 @@
 </div>
 
 <style lang="stylus">
-  $blur-base-size = 2px;
-  $blur-radius = 192px;
-  $blur-offset-top = -64px;
-  $blur-offset-left = 32px;
-  $blur-color-1 = rgba(#ff0044, 0.15);
-  $blur-color-2 = rgba(#6b24ff, 0.15);
-  $blur-color-3 = rgba(#00aaff, 0.15);
-
   .header {
     position: relative;
 
     max-width: 1200px;
 
     margin: auto;
-  }
-
-  .blur-box {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    z-index: -1;
-  }
-
-  .blur {
-    position: absolute;
-
-    width: $blur-base-size;
-    height: $blur-base-size;
-
-    border-radius: 50%;
-  }
-
-  .blur-1 {
-    top: $blur-offset-top;
-    left: $blur-offset-left;
-
-    background-color: $blur-color-1;
-    box-shadow: 0 0 ($blur-radius - $blur-base-size / 2) ($blur-radius - $blur-base-size / 2) @background-color;
-  }
-
-  .blur-2 {
-    top: $blur-offset-top + 32px * 5;
-    left: $blur-offset-left + 32px * 4;
-
-    background-color: $blur-color-2;
-    box-shadow: 0 0 ($blur-radius - $blur-base-size / 2) ($blur-radius - $blur-base-size / 2) @background-color;
-  }
-
-  .blur-3 {
-    top: $blur-offset-top + 32px * 2;
-    left: $blur-offset-left + 32px * 10;
-
-    background-color: $blur-color-3;
-    box-shadow: 0 0 ($blur-radius - $blur-base-size / 2) ($blur-radius - $blur-base-size / 2) @background-color;
   }
 
   .container {
