@@ -1,6 +1,7 @@
 <script lang="ts">
   import { marked } from 'marked';
   import Header from '~/components/Header.svelte';
+  import Footer from '~/components/Footer.svelte';
   import CVHeader from '~/components/CVHeader.svelte';
 
   const escapeTest = /[&<>"']/;
@@ -502,6 +503,8 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
 
     <div class="divider" />
   </main>
+
+  <Footer />
 </div>
 
 <style lang="stylus">
