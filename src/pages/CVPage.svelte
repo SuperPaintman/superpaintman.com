@@ -390,7 +390,7 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
   ];
 </script>
 
-<div>
+<div class="root">
   <Header />
 
   <main>
@@ -513,6 +513,10 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
   $position-dot-color = rgba(160, 160, 160, 1);
   $position-gap-height = 58px;
   $left-side-width = 128px + 32px;
+
+  .root {
+    overflow: hidden;
+  }
 
   .divider {
     margin: 32px 0;

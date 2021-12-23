@@ -1,10 +1,33 @@
+<script lang="ts">
+  import Splash from '~/components/Splash.svelte';
+
+  const splashOpacity = 0.15;
+  const splashRadius = 192 * 1.5;
+  const splashes = [
+    {
+      top: 0,
+      left: 48,
+      color: 0xff0044,
+      opacity: splashOpacity
+    },
+    {
+      top: 0 + 32 * 5,
+      left: 48 + 32 * 4,
+      color: 0x6b24ff,
+      opacity: splashOpacity
+    },
+    {
+      top: 0 + 32 * 2,
+      left: 48 + 32 * 10,
+      color: 0x00aaff,
+      opacity: splashOpacity
+    }
+  ];
+</script>
+
 <nav class="header">
   <div class="container">
-    <div class="blur-box">
-      <div class="blur blur-1" />
-      <div class="blur blur-2" />
-      <div class="blur blur-3" />
-    </div>
+    <Splash {splashes} radius={splashRadius} />
 
     <a class="logo" href="/">
       <div class="icon">AK</div>
@@ -19,14 +42,6 @@
 </nav>
 
 <style lang="stylus">
-  $blur-base-size = 2px;
-  $blur-radius = 192px;
-  $blur-offset-top = 0px;
-  $blur-offset-left = 48px;
-  $blur-color-1 = rgba(#ff0044, 0.15);
-  $blur-color-2 = rgba(#6b24ff, 0.15);
-  $blur-color-3 = rgba(#00aaff, 0.15);
-
   .container {
     position: relative;
     display: flex;
@@ -37,48 +52,6 @@
     padding: 0 32px;
 
     box-sizing: border-box;
-  }
-
-  .blur-box {
-    position: absolute;
-
-    top: $blur-offset-top;
-    left: $blur-offset-left;
-
-    z-index: -1;
-  }
-
-  .blur {
-    position: absolute;
-
-    width: $blur-base-size;
-    height: $blur-base-size;
-
-    border-radius: 50%;
-  }
-
-  .blur-1 {
-    top: 0;
-    left: 0;
-
-    background-color: $blur-color-1;
-    box-shadow: 0 0 ($blur-radius - $blur-base-size / 2) ($blur-radius - $blur-base-size / 2) @background-color;
-  }
-
-  .blur-2 {
-    top: 32px * 5;
-    left: 32px * 4;
-
-    background-color: $blur-color-2;
-    box-shadow: 0 0 ($blur-radius - $blur-base-size / 2) ($blur-radius - $blur-base-size / 2) @background-color;
-  }
-
-  .blur-3 {
-    top: 32px * 2;
-    left: 32px * 10;
-
-    background-color: $blur-color-3;
-    box-shadow: 0 0 ($blur-radius - $blur-base-size / 2) ($blur-radius - $blur-base-size / 2) @background-color;
   }
 
   .logo {
