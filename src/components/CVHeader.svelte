@@ -69,7 +69,7 @@
 <style lang="stylus">
   $blur-base-size = 2px;
   $blur-radius = 192px;
-  $blur-offset-top = -32px;
+  $blur-offset-top = -64px;
   $blur-offset-left = 32px;
   $blur-color-1 = rgba(#ff0044, 0.15);
   $blur-color-2 = rgba(#6b24ff, 0.15);
@@ -88,6 +88,8 @@
 
     top: 0;
     left: 0;
+
+    z-index: -1;
   }
 
   .blur {
@@ -142,15 +144,15 @@
   .fullname {
     font-size: 42px;
     font-weight: 700;
-    // line-height: 64px;
+    line-height: 48px;
   }
 
   .current-title {
-    margin-top: 16px;
+    margin-top: 8px;
 
     font-size: 32px;
     font-weight: 400;
-    // line-height: 48px;
+    line-height: 48px;
   }
 
   .contact {
