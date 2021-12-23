@@ -21,7 +21,6 @@
 <style lang="stylus">
   $blur-base-size = 2px;
   $blur-radius = 192px;
-  $blur-offset-top = -64px;
   $blur-offset-top = 0px;
   $blur-offset-left = 48px;
   $blur-color-1 = rgba(#ff0044, 0.15);
@@ -38,8 +37,6 @@
     padding: 0 32px;
 
     box-sizing: border-box;
-
-    z-index: 100;
   }
 
   .blur-box {

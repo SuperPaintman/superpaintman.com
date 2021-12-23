@@ -39,7 +39,7 @@
             >
           </tr>
           <tr class="contact-item linkedin">
-            <td class="type">LinkendIn</td>
+            <td class="type">LinkedIn</td>
             <td class="value"
               ><a href="https://linkedin.com/in/superpaintman"
                 >https://linkedin.com/in/superpaintman</a
