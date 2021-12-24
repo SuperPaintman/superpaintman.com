@@ -83,6 +83,7 @@ class HtmlWebpackSveltePlugin {
           }
 
           const sandbox = {
+            console: console,
             module: { exports: {} },
             exports: {}
           };

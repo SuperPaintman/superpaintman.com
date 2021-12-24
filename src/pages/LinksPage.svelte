@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { SeoTitle, SeoDescription } from '~/components/seo';
   import LinkItem from '~/components/LinkItem.svelte';
 
   const src: string = require(`~/images/avatar.jpg?{
@@ -69,6 +70,11 @@
 
   const photoAlt = 'Aleksandr Krivoshchekov (@SuperPaintman) Photo';
 </script>
+
+<SeoTitle value="Aleksandr Krivoshchekov (SuperPaintman) - Links" />
+<SeoDescription
+  value="Aleksandr Krivoshchekov's (SuperPaintman) personal links."
+/>
 
 <div class="root">
   <div class="container">

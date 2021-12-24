@@ -1,5 +1,6 @@
 <script lang="ts">
   import { marked } from 'marked';
+  import { SeoTitle, SeoDescription } from '~/components/seo';
   import CVHeader from '~/components/CVHeader.svelte';
 
   const escapeTest = /[&<>"']/;
@@ -232,6 +233,12 @@ Forward-thinking lead software engineer with over 5 years of experience designin
 A program committee member of [Highload++](http://highload.co) - the largest (2000+ attendees) annual tech conference in Eastern Europe.
   `.trim();
 
+  const seoDescription = `
+Forward-thinking lead software engineer with over 5 years of experience designing and building large-scale distributed systems in dynamic environments. Focused on developing efficient and clear solutions. Led successful migration of Yandex.Eats' catalog and search page to microservices which provided 99,9% uptime and ability to serve 10x traffic from the main screen.
+
+A program committee member of Highload++ - the largest (2000+ attendees) annual tech conference in Eastern Europe.
+  `.trim();
+
   const positions: Position[] = [
     {
       title: 'Lead Software Engineer',
@@ -387,6 +394,9 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     // 'Open Source',
   ];
 </script>
+
+<SeoTitle value="Aleksandr Krivoshchekov (SuperPaintman) - CV / Resume" />
+<SeoDescription value={seoDescription} />
 
 <div class="root">
   <CVHeader />

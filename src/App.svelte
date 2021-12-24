@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Router, Route } from 'svelte-routing';
+  import { Seo, SeoTitle, SeoDescription } from '~/components/seo';
   import Header from '~/components/Header.svelte';
   import Footer from '~/components/Footer.svelte';
   import LinksPage from './pages/LinksPage.svelte';
@@ -9,16 +10,23 @@
 </script>
 
 <div class="root">
-  <Router {url}>
-    <Header />
+  <Seo>
+    <SeoTitle value="Aleksandr Krivoshchekov (SuperPaintman)" />
+    <SeoDescription
+      value="Aleksandr Krivoshchekov's (SuperPaintman) personal site."
+    />
 
-    <main>
-      <Route path="/" component={LinksPage} />
-      <Route path="/cv" component={CVPage} />
-    </main>
+    <Router {url}>
+      <Header />
 
-    <Footer />
-  </Router>
+      <main>
+        <Route path="/" component={LinksPage} />
+        <Route path="/cv" component={CVPage} />
+      </main>
+
+      <Footer />
+    </Router>
+  </Seo>
 </div>
 
 <style lang="stylus">
