@@ -10,6 +10,7 @@
 
   export let splashes: Splash[] = [];
   export let radius: number = 0;
+  export let resizable: boolean = false;
 
   function hexToRgb(v: number): string {
     const r = (v >> 16) & 0xff;
@@ -19,10 +20,101 @@
     return `${r}, ${g}, ${b}`;
   }
 
-  // See: https://medium.com/airbnb-engineering/css-box-shadow-can-slow-down-scrolling-d8ea47ec6867.
-  function renderSplash(elem: HTMLDivElement) {
+  function updateSplash(elem: HTMLDivElement): HTMLDivElement {
     const width = elem.offsetWidth;
     const height = elem.offsetHeight;
+
+    console.log(height);
+
+    const image = renderSplash(width, height, splashes, radius);
+    if (image === null) {
+      return elem;
+    }
+
+    const div = document.createElement('div');
+    div.className = elem.className;
+    elem.replaceWith(div);
+
+    const inner = document.createElement('div');
+    inner.style.position = 'absolute';
+    inner.style.top = `${image.offsetY}px`;
+    inner.style.left = `${image.offsetX}px`;
+    inner.style.width = `${image.width}px`;
+    inner.style.height = `${image.height}px`;
+    inner.style.backgroundImage = `url(${image.data})`;
+
+    div.appendChild(inner);
+
+    return div;
+  }
+
+  type Image = {
+    data: string;
+    width: number;
+    height: number;
+    offsetX: number;
+    offsetY: number;
+  };
+
+  function imageCacheKey(
+    width: number,
+    height: number,
+    splashes: Splash[],
+    radius: number
+  ): string {
+    return `splash(${JSON.stringify({ width, height, splashes, radius })}`;
+  }
+
+  function loadCachedImage(key: string): Image | null {
+    // TODO(SuperPaintman): use external JS singleton instead.
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
+    const images = (window as any).__SPLASH_IMAGES__ as
+      | { [key: string]: Image | undefined }
+      | undefined;
+    if (!images) {
+      return null;
+    }
+
+    const image = images[key];
+
+    return image || null;
+  }
+
+  function storeCachedImage(key: string, image: Image): void {
+    // TODO(SuperPaintman): use external JS singleton instead.
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    let images = (window as any).__SPLASH_IMAGES__ as
+      | { [key: string]: Image | undefined }
+      | undefined;
+    if (!images) {
+      (window as any).__SPLASH_IMAGES__ = {};
+      images = (window as any).__SPLASH_IMAGES__;
+    }
+
+    if (images) {
+      images[key] = image;
+    }
+  }
+
+  // See: https://medium.com/airbnb-engineering/css-box-shadow-can-slow-down-scrolling-d8ea47ec6867.
+  function renderSplash(
+    width: number,
+    height: number,
+    splashes: Splash[],
+    radius: number
+  ): Image | null {
+    // Cache image.
+    const key = imageCacheKey(width, height, splashes, radius);
+    const old = loadCachedImage(key);
+    if (old !== null) {
+      return old;
+    }
 
     let maxX: number | undefined;
     let minX: number | undefined;
@@ -80,7 +172,7 @@
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     if (ctx === null) {
-      return;
+      return null;
     }
 
     canvas.width = canvasWidth;
@@ -119,26 +211,70 @@
       ctx.fill();
     }
 
-    // Insert splahes.
     const data = canvas.toDataURL();
 
-    const div = document.createElement('div');
-    div.className = elem.className;
-    elem.replaceWith(div);
+    const image = {
+      data,
+      width: canvasWidth,
+      height: canvasHeight,
+      offsetX: canvasOffsetX,
+      offsetY: canvasOffsetY
+    };
 
-    const inner = document.createElement('div');
-    inner.style.position = 'absolute';
-    inner.style.top = `${canvasOffsetY}px`;
-    inner.style.left = `${canvasOffsetX}px`;
-    inner.style.width = `${canvasWidth}px`;
-    inner.style.height = `${canvasHeight}px`;
-    inner.style.backgroundImage = `url(${data})`;
+    storeCachedImage(key, image);
 
-    div.appendChild(inner);
+    return image;
+  }
+
+  let raf: (fn: () => void) => void = setTimeout;
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.requestAnimationFrame !== 'undefined'
+  ) {
+    raf = window.requestAnimationFrame;
+  }
+
+  function debounce<T extends any[]>(
+    this: any,
+    func: (...args: T) => void,
+    timeout = 100
+  ): (...args: T) => void {
+    let timer: number | undefined;
+
+    return (...args) => {
+      clearTimeout(timer);
+
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout) as any as number;
+    };
   }
 
   function setupSplash(elem: HTMLDivElement) {
-    renderSplash(elem);
+    function handleResize() {
+      elem = updateSplash(elem);
+    }
+
+    handleResize();
+    raf(handleResize);
+
+    if (!resizable) {
+      return;
+    }
+
+    const handleResizeDebounced = debounce(handleResize);
+
+    window.addEventListener('resize', handleResizeDebounced);
+
+    return {
+      destroy() {
+        if (!resizable) {
+          return;
+        }
+
+        window.removeEventListener('resize', handleResizeDebounced);
+      }
+    };
   }
 </script>
 

@@ -61,13 +61,15 @@
       opacity: linkSplashOpacity
     },
     {
-      bottom: -16,
+      top: 48 + 16,
+      // bottom: -16,
       right: 16 * 16,
       color: 0x6b24ff,
       opacity: linkSplashOpacity
     },
     {
-      bottom: 16,
+      top: 48 - 16,
+      // bottom: 16,
       right: 16 * 5,
       color: 0xff0044,
       opacity: linkSplashOpacity
@@ -103,7 +105,11 @@
           {#each links as { name, title, url } (name)}
             <li>
               <a class="link" href={url} {title} target="_table">
-                <Splash splashes={linkSplashes} radius={linkSplashRadius} />
+                <Splash
+                  splashes={linkSplashes}
+                  radius={linkSplashRadius}
+                  resizable
+                />
 
                 <div class="inner">
                   <div>{name}</div>

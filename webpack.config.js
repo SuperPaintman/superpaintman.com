@@ -326,6 +326,9 @@ module.exports = {
     ])
   },
   devServer: {
-    hot: true
+    hot: true,
+    contentBase: outputPath,
+    // stats: 'errors-only',
+    watchContentBase: true
   }
 };
