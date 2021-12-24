@@ -27,7 +27,9 @@
 
 <nav class="header">
   <div class="container">
-    <Splash {splashes} radius={splashRadius} />
+    <div class="splash">
+      <Splash {splashes} radius={splashRadius} />
+    </div>
 
     <a class="logo" href="/">
       <div class="icon">AK</div>
@@ -52,6 +54,18 @@
     padding: 0 32px;
 
     box-sizing: border-box;
+  }
+
+  .splash {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: -1;
   }
 
   .logo {

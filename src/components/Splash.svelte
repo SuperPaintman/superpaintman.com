@@ -24,8 +24,6 @@
     const width = elem.offsetWidth;
     const height = elem.offsetHeight;
 
-    console.log(height);
-
     const image = renderSplash(width, height, splashes, radius);
     if (image === null) {
       return elem;
@@ -289,7 +287,5 @@
 
     top: 0;
     left: 0;
-
-    z-index: -1;
   }
 </style>

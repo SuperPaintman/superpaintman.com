@@ -51,9 +51,18 @@
     }
   ];
 
+  type SplashType = {
+    top?: number;
+    bottom?: number;
+    left?: number;
+    right?: number;
+    color?: number;
+    opacity?: number;
+  };
+
   const linkSplashOpacity = 0.03;
   const linkSplashRadius = 128 * 1.5;
-  const linkSplashes = [
+  const linkSplashes: SplashType[] = [
     {
       top: 16,
       left: 16 * 4,
@@ -75,6 +84,41 @@
       opacity: linkSplashOpacity
     }
   ];
+  const linkSplashesActive = linkSplashes.map((splash) => ({
+    ...splash,
+    opacity: 0.06
+  }));
+  const linkSplashesBorder = linkSplashes.map((splash) => {
+    const res = {
+      ...splash,
+      opacity: 0.25
+    };
+
+    if (splash.top) {
+      res.top = splash.top + 2;
+    }
+    if (splash.bottom) {
+      res.bottom = splash.bottom + 2;
+    }
+    if (splash.left) {
+      res.left = splash.left + 2;
+    }
+    if (splash.right) {
+      res.right = splash.right + 2;
+    }
+
+    return res;
+  });
+
+  function linkSplashOffsetX(i: number, length: number): number {
+    if (length <= 1) {
+      return 0;
+    }
+
+    const size = Math.sin(Math.PI * 2 * (i / (length - 1)));
+
+    return Math.ceil(size * 92);
+  }
 </script>
 
 <div class="root">
@@ -102,14 +146,35 @@
         </div>
 
         <ul class="links">
-          {#each links as { name, title, url } (name)}
+          {#each links as { name, title, url }, i (name)}
             <li>
               <a class="link" href={url} {title} target="_table">
-                <Splash
-                  splashes={linkSplashes}
-                  radius={linkSplashRadius}
-                  resizable
-                />
+                <div
+                  class="link-splash"
+                  style={`left: ${linkSplashOffsetX(i, links.length)}px`}
+                >
+                  <Splash
+                    splashes={linkSplashes}
+                    radius={linkSplashRadius}
+                    resizable
+                  />
+
+                  <div class="link-splash-active">
+                    <Splash
+                      splashes={linkSplashesActive}
+                      radius={linkSplashRadius}
+                      resizable
+                    />
+                  </div>
+                </div>
+
+                <div class="link-border">
+                  <Splash
+                    splashes={linkSplashesBorder}
+                    radius={linkSplashRadius}
+                    resizable
+                  />
+                </div>
 
                 <div class="inner">
                   <div>{name}</div>
@@ -128,6 +193,7 @@
 <style lang="stylus">
   $photo-size = 128px;
   $photo-border-padding = 4px;
+  $link-border = 2px;
 
   .root {
     overflow: hidden;
@@ -226,7 +292,6 @@
 
     margin-bottom: 16px;
 
-    border: 2px solid #ffffff;
     border-radius: 4px;
 
     color: inherit;
@@ -243,5 +308,61 @@
     background-color: #ffffff;
 
     overflow: hidden;
+  }
+
+  .link-border {
+    position: absolute;
+
+    top: -1 * $link-border;
+    left: -1 * $link-border;
+
+    width: 100%;
+    height: 100%;
+
+    padding: $link-border;
+
+    border-radius: 4px;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transition: opacity 0.03s linear;
+  }
+
+  .link:hover .link-border,
+  .link:focus .link-border {
+    opacity: 1;
+  }
+
+  .link-splash {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: -1;
+  }
+
+  .link-splash-active {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    transition: opacity 0.25s linear;
+  }
+
+  .link:hover .link-splash-active,
+  .link:focus .link-splash-active {
+    opacity: 1;
   }
 </style>
