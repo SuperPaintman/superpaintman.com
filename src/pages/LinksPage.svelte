@@ -6,6 +6,7 @@
   }`).src;
 
   type Link = {
+    type: string;
     name: string;
     url: string;
     title: string;
@@ -13,39 +14,46 @@
 
   const links: Link[] = [
     {
+      type: 'github',
       name: 'GitHub',
       url: '#',
       title: 'GitHub'
     },
     {
+      type: 'linkedin',
       name: 'LinkedIn',
       url: '#',
       title: 'LinkedIn'
     },
     {
+      type: 'telegram',
       name: 'Telegram',
       url: '#',
       title: 'Telegram'
     },
     {
+      type: 'habr',
       name: 'Habr',
       url: '#',
       title: 'Habr'
     },
     {
+      type: 'medium',
       name: 'Medium',
       url: '#',
       title: 'Medium'
     },
     {
+      type: 'instagram',
       name: 'Instagram',
       url: '#',
       title: 'Instagram'
     },
     {
+      type: 'email',
       name: 'SuperPaintmanDeveloper@gmail.com',
       url: '#',
-      title: 'SuperPaintmanDeveloper@gmail.com'
+      title: 'Email'
     }
   ];
 
@@ -143,7 +151,7 @@
       </div>
 
       <ul class="links">
-        {#each links as { name, title, url }, i (name)}
+        {#each links as { type, name, title, url }, i (type)}
           <li>
             <a class="link" href={url} {title} target="_table">
               <div
