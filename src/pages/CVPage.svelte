@@ -1,7 +1,5 @@
 <script lang="ts">
   import { marked } from 'marked';
-  import Header from '~/components/Header.svelte';
-  import Footer from '~/components/Footer.svelte';
   import CVHeader from '~/components/CVHeader.svelte';
 
   const escapeTest = /[&<>"']/;
@@ -391,120 +389,112 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
 </script>
 
 <div class="root">
-  <Header />
+  <CVHeader />
 
-  <main>
-    <CVHeader />
+  <div class="divider" />
 
-    <div class="divider" />
+  <div id="bio" class="section">
+    <div class="container">
+      <div class="left-side">
+        <h3 class="section-title">Bio</h3>
+      </div>
 
-    <div id="bio" class="section">
-      <div class="container">
-        <div class="left-side">
-          <h3 class="section-title">Bio</h3>
-        </div>
-
-        <div class="right-side">
-          <div class="description">
-            {@html renderMarkdown(description)}
-          </div>
+      <div class="right-side">
+        <div class="description">
+          {@html renderMarkdown(description)}
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="divider" />
+  <div class="divider" />
 
-    <div id="experience" class="section">
-      <div class="container">
-        <div class="left-side">
-          <h3 class="section-title">Experience</h3>
-        </div>
+  <div id="experience" class="section">
+    <div class="container">
+      <div class="left-side">
+        <h3 class="section-title">Experience</h3>
+      </div>
 
-        <div class="right-side">
-          {#each positions as { title, company, location, date, progress, description }}
-            <div class="position">
-              <div class="dot" />
-              {#if progress}
-                <div class="line" />
+      <div class="right-side">
+        {#each positions as { title, company, location, date, progress, description }}
+          <div class="position">
+            <div class="dot" />
+            {#if progress}
+              <div class="line" />
+            {/if}
+            <h4 class="title">{title}</h4>
+            <div class="info">
+              <span class="company">
+                {#if company.url}<a href={company.url} target="_blank"
+                    >{company.name}</a
+                  >{:else}{company.name}{/if}</span
+              >{#if location},{/if}
+              {#if location}
+                <span class="location">{location}</span>
               {/if}
-              <h4 class="title">{title}</h4>
-              <div class="info">
-                <span class="company">
-                  {#if company.url}<a href={company.url} target="_blank"
-                      >{company.name}</a
-                    >{:else}{company.name}{/if}</span
-                >{#if location},{/if}
-                {#if location}
-                  <span class="location">{location}</span>
-                {/if}
-              </div>
-              <div class="date">
-                <span class="range"
-                  >{formatDateRange(date.start, date.end)}</span
-                >
-                {#if date.end}
-                  <span class="duration"
-                    >{formatDuration(date.start, date.end)}</span
-                  >
-                {/if}
-              </div>
-
-              {#if description}
-                <div class="description">
-                  {@html renderMarkdown(description)}
-                </div>
-              {/if}
-
-              <div class="position-divider" />
             </div>
+            <div class="date">
+              <span class="range">{formatDateRange(date.start, date.end)}</span>
+              {#if date.end}
+                <span class="duration"
+                  >{formatDuration(date.start, date.end)}</span
+                >
+              {/if}
+            </div>
+
+            {#if description}
+              <div class="description">
+                {@html renderMarkdown(description)}
+              </div>
+            {/if}
+
+            <div class="position-divider" />
+          </div>
+        {/each}
+      </div>
+    </div>
+  </div>
+
+  <div class="divider" />
+
+  <div id="languages" class="section">
+    <div class="container">
+      <div class="left-side">
+        <h3 class="section-title">Languages</h3>
+      </div>
+
+      <div class="right-side">
+        <ul class="languages">
+          {#each languages as { name, level } (name)}
+            <li class="language">
+              <span class="name">{name}</span>
+              <span class="level">({level})</span>
+            </li>
           {/each}
-        </div>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <div class="divider" />
+  <div class="divider" />
 
-    <div id="languages" class="section">
-      <div class="container">
-        <div class="left-side">
-          <h3 class="section-title">Languages</h3>
-        </div>
+  <div id="skills" class="section">
+    <div class="container">
+      <div class="left-side">
+        <h3 class="section-title">Skills</h3>
+      </div>
 
-        <div class="right-side">
-          <ul class="languages">
-            {#each languages as { name, level } (name)}
-              <li class="language">
-                <span class="name">{name}</span>
-                <span class="level">({level})</span>
-              </li>
-            {/each}
-          </ul>
-        </div>
+      <div class="right-side">
+        <ul class="skills">
+          {#each skills as skill (skill)}
+            <li class="skill">{skill}</li>
+          {/each}
+        </ul>
       </div>
     </div>
+  </div>
 
-    <div class="divider" />
-
-    <div id="skills" class="section">
-      <div class="container">
-        <div class="left-side">
-          <h3 class="section-title">Skills</h3>
-        </div>
-
-        <div class="right-side">
-          <ul class="skills">
-            {#each skills as skill (skill)}
-              <li class="skill">{skill}</li>
-            {/each}
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="divider" />
-  </main>
-
-  <Footer />
+  <div class="divider" />
 </div>
 
 <style lang="stylus">
@@ -513,10 +503,6 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
   $position-dot-color = rgba(160, 160, 160, 1);
   $position-gap-height = 58px;
   $left-side-width = 128px + 32px;
-
-  .root {
-    overflow: hidden;
-  }
 
   .divider {
     margin: 32px 0;

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { links } from 'svelte-routing';
   import Splash from '~/components/Splash.svelte';
 
   const splashOpacity = 0.15;
@@ -31,11 +32,11 @@
       <Splash {splashes} radius={splashRadius} />
     </div>
 
-    <a class="logo" href="/">
+    <a class="logo" href="/" use:links>
       <div class="icon">AK</div>
     </a>
 
-    <ol class="links">
+    <ol class="links" use:links>
       <li class="link"><a href="/">Links</a></li>
       <li class="link"><a href="/blog">Blog</a></li>
       <li class="link"><a href="/cv">CV</a></li>
@@ -120,7 +121,7 @@
     line-height: 16px;
   }
 
-  .links a {
+  .links :global(a) {
     color: inherit;
     text-decoration: none;
   }

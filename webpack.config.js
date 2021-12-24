@@ -329,6 +329,7 @@ module.exports = {
     hot: true,
     contentBase: outputPath,
     // stats: 'errors-only',
-    watchContentBase: true
+    watchContentBase: true,
+    historyApiFallback: true
   }
 };

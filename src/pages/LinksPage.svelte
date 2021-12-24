@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Header from '~/components/Header.svelte';
-  import Footer from '~/components/Footer.svelte';
   import Splash from '~/components/Splash.svelte';
 
   const src: string = require(`~/images/avatar.jpg?{
@@ -122,82 +120,72 @@
 </script>
 
 <div class="root">
-  <Header />
+  <div class="container">
+    <div class="main">
+      <div class="about">
+        <div class="photo">
+          <div class="photo-border" />
 
-  <main>
-    <div class="container">
-      <div class="main">
-        <div class="about">
-          <div class="photo">
-            <div class="photo-border" />
-
-            <div class="inner">
-              <img
-                class="photo-image"
-                width={128}
-                height={128}
-                {src}
-                alt="Aleksandr Krivoshchekov (@SuperPaintman) Photo"
-              />
-            </div>
+          <div class="inner">
+            <img
+              class="photo-image"
+              width={128}
+              height={128}
+              {src}
+              alt="Aleksandr Krivoshchekov (@SuperPaintman) Photo"
+            />
           </div>
-          <h1 class="fullname">Aleksandr Krivoshchekov</h1>
-          <div class="current-title">Lead Software Engineer</div>
         </div>
-
-        <ul class="links">
-          {#each links as { name, title, url }, i (name)}
-            <li>
-              <a class="link" href={url} {title} target="_table">
-                <div
-                  class="link-splash"
-                  style={`left: ${linkSplashOffsetX(i, links.length)}px`}
-                >
-                  <Splash
-                    splashes={linkSplashes}
-                    radius={linkSplashRadius}
-                    resizable
-                  />
-
-                  <div class="link-splash-active">
-                    <Splash
-                      splashes={linkSplashesActive}
-                      radius={linkSplashRadius}
-                      resizable
-                    />
-                  </div>
-                </div>
-
-                <div class="link-border">
-                  <Splash
-                    splashes={linkSplashesBorder}
-                    radius={linkSplashRadius}
-                    resizable
-                  />
-                </div>
-
-                <div class="inner">
-                  <div>{name}</div>
-                </div>
-              </a>
-            </li>
-          {/each}
-        </ul>
+        <h1 class="fullname">Aleksandr Krivoshchekov</h1>
+        <div class="current-title">Lead Software Engineer</div>
       </div>
-    </div>
-  </main>
 
-  <Footer />
+      <ul class="links">
+        {#each links as { name, title, url }, i (name)}
+          <li>
+            <a class="link" href={url} {title} target="_table">
+              <div
+                class="link-splash"
+                style={`left: ${linkSplashOffsetX(i, links.length)}px`}
+              >
+                <Splash
+                  splashes={linkSplashes}
+                  radius={linkSplashRadius}
+                  resizable
+                />
+
+                <div class="link-splash-active">
+                  <Splash
+                    splashes={linkSplashesActive}
+                    radius={linkSplashRadius}
+                    resizable
+                  />
+                </div>
+              </div>
+
+              <div class="link-border">
+                <Splash
+                  splashes={linkSplashesBorder}
+                  radius={linkSplashRadius}
+                  resizable
+                />
+              </div>
+
+              <div class="inner">
+                <div>{name}</div>
+              </div>
+            </a>
+          </li>
+        {/each}
+      </ul>
+    </div>
+  </div>
 </div>
 
 <style lang="stylus">
   $photo-size = 128px;
   $photo-border-padding = 4px;
   $link-border = 2px;
-
-  .root {
-    overflow: hidden;
-  }
 
   .container {
     max-width: 1200px;
