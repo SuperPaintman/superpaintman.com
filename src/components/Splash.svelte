@@ -224,12 +224,17 @@
     return image;
   }
 
-  let raf: (fn: () => void) => void = setTimeout;
+  let raf: (fn: () => void) => void = () => undefined;
   if (
     typeof window !== 'undefined' &&
     typeof window.requestAnimationFrame !== 'undefined'
   ) {
     raf = window.requestAnimationFrame;
+  } else if (
+    typeof window !== 'undefined' &&
+    typeof window.setTimeout !== 'undefined'
+  ) {
+    raf = window.setTimeout;
   }
 
   function debounce<T extends any[]>(

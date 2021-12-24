@@ -15,7 +15,6 @@
  */
 
 /* Imports */
-// @import "node_modules/bootstrap/dist/css/bootstrap.css"
 @import "normalize.css/normalize.css"
 @import "config.styl"
 
@@ -25,42 +24,4 @@ if $font_main == "Roboto"
 
 /* General */
 body
-  position: relative
-
-  margin: 0
-
-  background-color: $color_main_bg
-  background-image: url("~images/background.png")
-
-  color: $color_main_fg
-
   font-family: $font_main
-
-a
-  color: $color_link_fg
-  text-decoration: none
-
-  transition: color 0.1s linear
-
-  &:hover,
-  &:focus
-    color: darken($color_link_fg, 10%)
-    text-decoration: underline
-
-  &:active
-    color: darken($color_link_fg, 20%)
-    text-decoration: underline
-
-  &:focus
-    outline: 5px auto -webkit-focus-ring-color
-    outline-offset: -2px
-
-/* Helpers */
-._clearfix
-  &:before,
-  &:after
-    content: " "
-    display: table
-
-  &:after
-    clear: both

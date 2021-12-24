@@ -117,6 +117,8 @@
 
     return Math.ceil(size * 92);
   }
+
+  const photoAlt = 'Aleksandr Krivoshchekov (@SuperPaintman) Photo';
 </script>
 
 <div class="root">
@@ -132,7 +134,7 @@
               width={128}
               height={128}
               {src}
-              alt="Aleksandr Krivoshchekov (@SuperPaintman) Photo"
+              alt={photoAlt}
             />
           </div>
         </div>
