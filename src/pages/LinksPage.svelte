@@ -325,7 +325,7 @@
 
     overflow: hidden;
 
-    opacity: 0;
+    opacity: 0.3;
 
     transition: opacity 0.03s linear;
   }
