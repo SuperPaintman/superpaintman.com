@@ -76,6 +76,8 @@ class HtmlWebpackSveltePlugin {
       HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tap(
         'HtmlWebpackSveltePlugin',
         (data) => {
+          const url = data.plugin.options.url;
+
           if (!this._render) {
             data.html = data.html.replace('$$html$$', '');
             data.html = data.html.replace('$$css$$', '');
@@ -103,7 +105,7 @@ class HtmlWebpackSveltePlugin {
 
           script.runInContext(context);
 
-          const component = context.module.exports.default.render({ locals });
+          const component = context.module.exports.default.render({ url });
 
           data.html = data.html.replace('$$html$$', component.html);
           // data.html = data.html.replace(
@@ -170,7 +172,6 @@ module.exports = {
   plugins: filter([
     /* Define */
     new DefinePlugin({
-      LOCALS: JSON.stringify(locals),
       IS_SSR: JSON.stringify(ssr)
     }),
 
@@ -183,6 +184,20 @@ module.exports = {
       excludeChunks: ['server']
     }),
     new HtmlWebpackSveltePlugin(ssr),
+    ssr &&
+      new HtmlWebpackPlugin({
+        template: path.join(srcPath, 'index.html'),
+        excludeChunks: ['server'],
+        url: '/',
+        filename: 'pages/index.html'
+      }),
+    ssr &&
+      new HtmlWebpackPlugin({
+        template: path.join(srcPath, 'index.html'),
+        excludeChunks: ['server'],
+        url: '/cv',
+        filename: 'pages/cv.html'
+      }),
 
     /* Favicons */
     new FaviconsWebpackPlugin({

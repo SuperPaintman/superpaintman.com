@@ -165,7 +165,7 @@ function transformMacros(context) {
       }
 
       if (node.expression.text === '$$trim$$') {
-        return transformMarkdown(node);
+        return transformTrim(node);
       }
 
       if (node.expression.text === '$$markdown$$') {
