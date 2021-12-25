@@ -14,16 +14,8 @@
  * limitations under the License.
  */
 
-/* Imports */
-@import "normalize.css/normalize.css";
-@import "config.styl";
+'use strict';
 
-/* Init */
-if $font_main == "Roboto" {
-  @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,100,300,700&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic");
-}
-
-/* General */
-body {
-  font-family: $font_main, sans-serif, serif;
-}
+export { default as Layout } from './Layout.svelte';
+export { default as LayoutSlot } from './LayoutSlot.svelte';
+export { default as LayoutDisableSlot } from './LayoutDisableSlot.svelte';

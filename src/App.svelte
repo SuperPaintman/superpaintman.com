@@ -14,6 +14,9 @@
  * limitations under the License.
 -->
 <script lang="ts">
+  import * as qs from 'querystring';
+  import { writable } from 'svelte/store';
+  import { onMount } from 'svelte';
   import { Router, Route } from 'svelte-routing';
   import {
     Seo,
@@ -25,6 +28,7 @@
     SeoTwitter,
     SeoOpenGraph
   } from '~/components/seo';
+  import { Layout, LayoutSlot } from '~/components/layout';
   import Header from '~/components/Header.svelte';
   import HeaderLink from '~/components/HeaderLink.svelte';
   import Footer from '~/components/Footer.svelte';
@@ -33,6 +37,22 @@
   import CVPage from './pages/CVPage.svelte';
 
   export let url = '';
+
+  const format = writable<string | undefined>(undefined);
+  onMount(() => {
+    const search = window.location.search;
+    if (search.length === 0) {
+      return;
+    }
+
+    const query = qs.parse(search.slice(1));
+
+    if (typeof query.format === 'string') {
+      format.set(query.format);
+    } else {
+      format.set(undefined);
+    }
+  });
 </script>
 
 <div class="root">
@@ -65,19 +85,25 @@
       siteName="Aleksandr Krivoshchekov (@SuperPaintman)"
     />
 
-    <Router {url}>
-      <Header>
-        <HeaderLink to="/">Links</HeaderLink>
-        <HeaderLink to="/cv">CV</HeaderLink>
-      </Header>
+    <Layout>
+      <Router {url}>
+        <LayoutSlot name="header">
+          <Header>
+            <HeaderLink to="/">Links</HeaderLink>
+            <HeaderLink to="/cv">CV</HeaderLink>
+          </Header>
+        </LayoutSlot>
 
-      <main>
-        <Route path="/" component={LinksPage} />
-        <Route path="/cv" component={CVPage} />
-      </main>
+        <main>
+          <Route path="/" component={LinksPage} />
+          <Route path="/cv" component={CVPage} format={$format} />
+        </main>
 
-      <Footer />
-    </Router>
+        <LayoutSlot name="header">
+          <Footer />
+        </LayoutSlot>
+      </Router>
+    </Layout>
   </Seo>
 
   <Counters yandex={41936319} google="UA-89780612-1" />

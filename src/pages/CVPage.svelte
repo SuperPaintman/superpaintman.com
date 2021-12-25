@@ -20,8 +20,12 @@
     SeoKeywords,
     SeoCanonical
   } from '~/components/seo';
+  import { LayoutDisableSlot } from '~/components/layout';
   import CVHeader from '~/components/CVHeader.svelte';
   import * as cv from '~/content/cv';
+  import SeoRobots from '~/components/seo/SeoRobots.svelte';
+
+  export let format: string | undefined;
 
   const months: { [key: number]: string } = {
     1: 'Jan',
@@ -93,8 +97,15 @@
 <SeoKeywords value={['CV', 'Resume']} />
 <SeoCanonical value="https://superpaintman.com/cv" />
 
-<div class="root">
-  <CVHeader />
+{#if format === 'pdf'}
+  <SeoRobots noIndex />
+
+  <LayoutDisableSlot name="header" />
+  <LayoutDisableSlot name="footer" />
+{/if}
+
+<div class="root" class:pdf={format === 'pdf'}>
+  <CVHeader {format} />
 
   <div class="divider" />
 
@@ -199,7 +210,9 @@
     </div>
   </div>
 
-  <div class="divider" />
+  {#if format !== 'pdf'}
+    <div class="divider" />
+  {/if}
 </div>
 
 <style lang="stylus">
@@ -208,6 +221,20 @@
   $position-dot-color = rgba(160, 160, 160, 1);
   $position-gap-height = 58px;
   $left-side-width = 128px + 32px;
+
+  .root {
+    @media print {
+      // PDF breaks sometimes.
+      font-family: sans-serif;
+    }
+  }
+
+  .root.pdf {
+    // PDF breaks sometimes.
+    font-family: sans-serif;
+
+    margin: 48px 0;
+  }
 
   .divider {
     margin: 32px 0;
@@ -388,6 +415,10 @@
     @media (max-width: 400px) {
       width: 100%;
     }
+  }
+
+  .root.pdf .skills > .skill {
+    width: 33.33%;
   }
 
   .languages {

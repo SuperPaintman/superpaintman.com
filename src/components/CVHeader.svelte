@@ -14,13 +14,15 @@
  * limitations under the License.
 -->
 <script lang="ts">
+  export let format: string | undefined;
+
   function formatPhone(value: string): string {
     // TODO
     return value;
   }
 </script>
 
-<div class="header">
+<div class="header" class:pdf={format === 'pdf'}>
   <div class="container">
     <div class="left-side">
       <div class="fullname">Aleksandr Krivoshchekov</div>
@@ -33,7 +35,7 @@
           <tr class="contact-item email">
             <td class="type">Email</td>
             <td class="value"
-              ><a href="SuperPaintmanDeveloper@gmail.com"
+              ><a href="mailto:SuperPaintmanDeveloper@gmail.com" title="Email"
                 >SuperPaintmanDeveloper@gmail.com</a
               ></td
             >
@@ -49,14 +51,15 @@
           <tr class="contact-item website">
             <td class="type">Personal</td>
             <td class="value"
-              ><a href="https://superpaintman.com">https://superpaintman.com</a
+              ><a href="https://superpaintman.com" title="Personal"
+                >https://superpaintman.com</a
               ></td
             >
           </tr>
           <tr class="contact-item linkedin">
             <td class="type">LinkedIn</td>
             <td class="value"
-              ><a href="https://linkedin.com/in/superpaintman"
+              ><a href="https://linkedin.com/in/superpaintman" title="LinkedIn"
                 >https://linkedin.com/in/superpaintman</a
               ></td
             >
@@ -64,7 +67,7 @@
           <tr class="contact-item github">
             <td class="type">GitHub</td>
             <td class="value"
-              ><a href="https://github.com/SuperPaintman"
+              ><a href="https://github.com/SuperPaintman" title="GitHub"
                 >https://github.com/SuperPaintman</a
               ></td
             >
@@ -102,6 +105,10 @@
     // @media (max-width: 512px) {
     //   margin: 32px 16px;
     // }
+  }
+
+  .header.pdf .container {
+    margin: 32px 48px;
   }
 
   .left-side {

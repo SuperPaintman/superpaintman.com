@@ -1,4 +1,4 @@
-/*!
+<!--!
  * Copyright (C) 2017-2021 Aleksandr Krivoshchekov <SuperPaintmanDeveloper@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,18 +12,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+-->
+<script lang="ts">
+  import { onDestroy } from 'svelte';
+  import { getLayoutContext, noopUnset } from './context';
 
-/* Imports */
-@import "normalize.css/normalize.css";
-@import "config.styl";
+  export let name: string;
 
-/* Init */
-if $font_main == "Roboto" {
-  @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,100,300,700&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic");
-}
+  const context = getLayoutContext();
 
-/* General */
-body {
-  font-family: $font_main, sans-serif, serif;
-}
+  let unset = noopUnset;
+  $: {
+    unset();
+    unset = context.set(name, false);
+  }
+
+  onDestroy(() => unset());
+</script>
