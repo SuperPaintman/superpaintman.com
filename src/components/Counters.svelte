@@ -76,10 +76,12 @@
   }
 </script>
 
-{#if yandex}
-  {@html yandexMetrika(yandex)}
-{/if}
+<svelte:head>
+  {#if yandex}
+    {@html yandexMetrika(yandex)}
+  {/if}
 
-{#if google}
-  {@html googleAnalytics(google)}
-{/if}
+  {#if google}
+    {@html googleAnalytics(google)}
+  {/if}
+</svelte:head>

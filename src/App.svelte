@@ -13,6 +13,7 @@
   import Header from '~/components/Header.svelte';
   import HeaderLink from '~/components/HeaderLink.svelte';
   import Footer from '~/components/Footer.svelte';
+  import Counters from '~/components/Counters.svelte';
   import LinksPage from './pages/LinksPage.svelte';
   import CVPage from './pages/CVPage.svelte';
 
@@ -63,6 +64,8 @@
       <Footer />
     </Router>
   </Seo>
+
+  <Counters yandex={41936319} google="UA-89780612-1" />
 </div>
 
 <style lang="stylus">
