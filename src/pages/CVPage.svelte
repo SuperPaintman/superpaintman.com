@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { marked } from 'marked';
   import {
     SeoTitle,
     SeoDescription,
@@ -7,172 +6,7 @@
     SeoCanonical
   } from '~/components/seo';
   import CVHeader from '~/components/CVHeader.svelte';
-
-  const escapeTest = /[&<>"']/;
-  const escapeReplace = /[&<>"']/g;
-  const escapeTestNoEncode = /[<>"']|&(?!#?\w+;)/;
-  const escapeReplaceNoEncode = /[<>"']|&(?!#?\w+;)/g;
-  const escapeReplacements: { [key: string]: string } = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;'
-  };
-  const getEscapeReplacement = (ch: string): string | undefined =>
-    escapeReplacements[ch];
-  function escape(html: string, encode?: boolean): string {
-    if (encode) {
-      if (escapeTest.test(html)) {
-        return html.replace(escapeReplace, getEscapeReplacement as any);
-      }
-    } else {
-      if (escapeTestNoEncode.test(html)) {
-        return html.replace(escapeReplaceNoEncode, getEscapeReplacement as any);
-      }
-    }
-
-    return html;
-  }
-
-  const nonWordAndColonTest = /[^\w:]/g;
-  const originIndependentUrl = /^$|^[a-z][a-z0-9+.-]*:|^[?#]/i;
-  function cleanUrl(
-    sanitize: boolean | undefined,
-    base: string | undefined,
-    href: string
-  ): string | null {
-    if (sanitize) {
-      let prot;
-      try {
-        prot = decodeURIComponent(unescape(href))
-          .replace(nonWordAndColonTest, '')
-          .toLowerCase();
-      } catch (e) {
-        return null;
-      }
-      if (
-        prot.indexOf('javascript:') === 0 ||
-        prot.indexOf('vbscript:') === 0 ||
-        prot.indexOf('data:') === 0
-      ) {
-        return null;
-      }
-    }
-    if (base && !originIndependentUrl.test(href)) {
-      href = resolveUrl(base, href);
-    }
-    try {
-      href = encodeURI(href).replace(/%25/g, '%');
-    } catch (e) {
-      return null;
-    }
-    return href;
-  }
-
-  const baseUrls: { [key: string]: string } = {};
-  const justDomain = /^[^:]+:\/*[^/]*$/;
-  const protocol = /^([^:]+:)[\s\S]*$/;
-  const domain = /^([^:]+:\/*[^/]*)[\s\S]*$/;
-  function resolveUrl(base: string, href: string): string {
-    if (!baseUrls[' ' + base]) {
-      // we can ignore everything in base after the last slash of its path component,
-      // but we might need to add _that_
-      // https://tools.ietf.org/html/rfc3986#section-3
-      if (justDomain.test(base)) {
-        baseUrls[' ' + base] = base + '/';
-      } else {
-        baseUrls[' ' + base] = rtrim(base, '/', true);
-      }
-    }
-    base = baseUrls[' ' + base];
-    const relativeBase = base.indexOf(':') === -1;
-
-    if (href.substring(0, 2) === '//') {
-      if (relativeBase) {
-        return href;
-      }
-      return base.replace(protocol, '$1') + href;
-    } else if (href.charAt(0) === '/') {
-      if (relativeBase) {
-        return href;
-      }
-      return base.replace(domain, '$1') + href;
-    } else {
-      return base + href;
-    }
-  }
-
-  function rtrim(str: string, c: string, invert: boolean): string {
-    const l = str.length;
-    if (l === 0) {
-      return '';
-    }
-
-    // Length of suffix matching the invert condition.
-    let suffLen = 0;
-
-    // Step left until we fail to match the invert condition.
-    while (suffLen < l) {
-      const currChar = str.charAt(l - suffLen - 1);
-      if (currChar === c && !invert) {
-        suffLen++;
-      } else if (currChar !== c && invert) {
-        suffLen++;
-      } else {
-        break;
-      }
-    }
-
-    return str.substr(0, l - suffLen);
-  }
-
-  class CustomRenderer<T = never> extends marked.Renderer<T> {
-    link(href: string | null, title: string | null, text: string): string | T {
-      if (href !== null) {
-        href = cleanUrl(this.options.sanitize, this.options.baseUrl, href);
-      }
-      if (href === null) {
-        return text;
-      }
-      let out = '<a href="' + escape(href) + '"';
-      if (title) {
-        out += ' title="' + title + '"';
-      }
-      out += ' target="_blank">' + text + '</a>';
-      return out;
-    }
-  }
-
-  const markdownRenderer = new CustomRenderer();
-
-  function renderMarkdown(source: string): string {
-    return marked(source, {
-      gfm: true,
-      renderer: markdownRenderer
-    });
-  }
-
-  type PositionDate = {
-    month: number;
-    year: number;
-  };
-
-  type Position = {
-    title: string;
-    partTime?: boolean;
-    progress?: boolean;
-    company: {
-      name: string;
-      url?: string;
-    };
-    location?: string;
-    date: {
-      start: PositionDate;
-      end?: PositionDate;
-    };
-    description?: string;
-  };
+  import * as cv from '~/content/cv';
 
   const months: { [key: number]: string } = {
     1: 'Jan',
@@ -188,7 +22,10 @@
     11: 'Nov',
     12: 'Dec'
   };
-  function formatDateRange(start: PositionDate, end?: PositionDate): string {
+  function formatDateRange(
+    start: cv.PositionDate,
+    end?: cv.PositionDate
+  ): string {
     let res = months[start.month] + ' ' + start.year;
     res += ' – ';
 
@@ -201,7 +38,10 @@
     return res;
   }
 
-  function formatDuration(start: PositionDate, end: PositionDate): string {
+  function formatDuration(
+    start: cv.PositionDate,
+    end: cv.PositionDate
+  ): string {
     const startMonts = start.year * 12 + start.month;
     const endMonts = end.year * 12 + end.month;
 
@@ -231,177 +71,10 @@
 
     return res;
   }
-
-  const description = `
-Forward-thinking lead software engineer with over 5 years of experience designing and building large-scale distributed systems in dynamic environments. Focused on developing efficient and clear solutions. Led successful migration of Yandex.Eats' catalog and search page to microservices which provided 99,9% uptime and ability to serve 10x traffic from the main screen.
-
-A program committee member of [Highload++](http://highload.co) - the largest (2000+ attendees) annual tech conference in Eastern Europe.
-  `.trim();
-
-  const seoDescription = `
-Forward-thinking lead software engineer with over 5 years of experience designing and building large-scale distributed systems in dynamic environments. Focused on developing efficient and clear solutions. Led successful migration of Yandex.Eats' catalog and search page to microservices which provided 99,9% uptime and ability to serve 10x traffic from the main screen.
-
-A program committee member of Highload++ - the largest (2000+ attendees) annual tech conference in Eastern Europe.
-  `.trim();
-
-  const positions: Position[] = [
-    {
-      title: 'Lead Software Engineer',
-      company: {
-        name: 'Yandex',
-        url: 'https://www.linkedin.com/company/yandex'
-      },
-      progress: true,
-      location: 'Moscow, Russia',
-      date: {
-        start: { month: 4, year: 2019 }
-      },
-      description: `
-- Design, develop, and support high performance distributed system that serves Yandex.Eats' main screen.
-- Lead and mentor an engineering team.
-- Work closely with other engineering teams and stakeholders to collect requirements and describe technical designs.
-- Define and prioritize projects and tasks.
-- Review code and architecture of new services.
-
-**Stack**:
-Go, PostgreSQL, Docker, Redis, Prometheus, Kafka-like event sourcing solution.
-      `.trim()
-    },
-    {
-      title: 'Software Engineer',
-      company: {
-        name: 'Yandex',
-        url: 'https://www.linkedin.com/company/yandex'
-      },
-      location: 'Moscow, Russia',
-      date: {
-        start: { month: 6, year: 2018 },
-        end: { month: 4, year: 2019 }
-      },
-      description: `
-- Developed restaurant page, cart, and checkout page components of the web application.
-- Designed and implemented reusable UI components.
-- Reviewed code and provided helpful feedback.
-- Updated, refactored, covered with unit tests, and wrote documentation for common payment page and notification service.
-- Improved an internal toolchain.
-
-**Key Achievements**:
-- Created an automated system and toolchain to review and check API specifications which standardized the API change process. The system was used by all teams.
-- Improved and documented company's API design guide.
-- Documented TypeScript and JavaScript code style guide.
-
-**Stack**:
-TypeScript, JavaScript, Node.js, React, MobX, InfluxDB.
-      `.trim()
-    },
-    {
-      title: 'Program Committee Member',
-      partTime: true,
-      company: {
-        name: 'Ontico',
-        url: 'https://www.linkedin.com/company/ontico'
-      },
-      location: 'Moscow, Russia',
-      date: {
-        start: { month: 9, year: 2021 }
-      },
-      description: `
-[Highload++](http://highload.co) (http://highload.co) and [RIT++](http://ritfest.ru/) (http://ritfest.ru/) are the largest (2000+ attendees) annual tech conferences in Eastern Europe.
-
-**Link**: https://www.highload.ru/moscow/2021/committee (Александр Кривощеков)
-      `.trim()
-    },
-    {
-      title: 'Senior Software Engineer',
-      company: {
-        name: 'Exquance Software',
-        url: 'https://www.linkedin.com/company/exquance-software'
-      },
-      location: 'Saint Petersburg, Russia',
-      date: {
-        start: { month: 3, year: 2016 },
-        end: { month: 6, year: 2018 }
-      },
-      description: `
-- Designed, developed, and supported core services: license management system, reporting system, billing system, and web dashboard.
-- Worked closely with stakeholders to translate requirements into tasks and projects.
-- Mentored and managed junior web developers.
-- Designed and implemented a single sign-on scheme and SDK for all company's services.
-
-**Key Achievements**:
-- Set up CI/CD pipelines for all front-end and back-end services, reducing time to build and release by 80%.
-- License management system eliminated the routine with setting up new companies, issuing licenses, and permissions.
-- Documented system design guidelines, code style guide, and API design guide.
-
-**Stack**:
-TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, RabbitMQ, Redis.
-      `.trim()
-    },
-    {
-      title: 'Web Developer',
-      company: { name: 'Freelance' },
-      location: 'Remote',
-      date: {
-        start: { month: 1, year: 2012 },
-        end: { month: 3, year: 2016 }
-      }
-    }
-  ];
-
-  const languages = [
-    {
-      name: 'English',
-      level: 'Professional working proficiency'
-    },
-    {
-      name: 'Russian',
-      level: 'Excellent, Native speaker'
-    }
-  ];
-
-  const skills = [
-    'Distributed Systems',
-    'Software Architecture',
-    'Team Leadership',
-    'Go',
-    'JavaScript',
-    'TypeScript',
-    'C',
-    // 'Crystal',
-    'Node.js',
-    'React',
-    'Angular',
-    'AngularJS',
-    'Docker',
-    'MySQL',
-    'PostgreSQL',
-    'Redis',
-    'MongoDB',
-    'RabbitMQ',
-    'Apache Kafka',
-    'Linux',
-    'Nginx',
-    'SQL',
-    'Git',
-    'AMQP',
-    'Microservices',
-    'SOA',
-    'Software Engineering',
-    'Scalability',
-    'Security',
-    // 'System Architecture',
-    'Unit Testing',
-    'Computer Science',
-    // 'Application Development',
-    'Team Management'
-    // 'Data Storage',
-    // 'Web Application Development'
-    // 'Open Source',
-  ];
 </script>
 
 <SeoTitle value="Aleksandr Krivoshchekov (SuperPaintman) - CV / Resume" />
-<SeoDescription value={seoDescription} />
+<SeoDescription value={cv.seoDescription} />
 <SeoKeywords value={['CV', 'Resume']} />
 <SeoCanonical value="https://superpaintman.com/cv" />
 
@@ -418,7 +91,7 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
 
       <div class="right-side">
         <div class="description">
-          {@html renderMarkdown(description)}
+          {@html cv.description}
         </div>
       </div>
     </div>
@@ -433,7 +106,7 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
       </div>
 
       <div class="right-side">
-        {#each positions as { title, company, location, date, progress, description }}
+        {#each cv.positions as { title, company, location, date, progress, description }}
           <div class="position">
             <div class="dot" />
             {#if progress}
@@ -461,7 +134,7 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
 
             {#if description}
               <div class="description">
-                {@html renderMarkdown(description)}
+                {@html description}
               </div>
             {/if}
 
@@ -482,7 +155,7 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
 
       <div class="right-side">
         <ul class="languages">
-          {#each languages as { name, level } (name)}
+          {#each cv.languages as { name, level } (name)}
             <li class="language">
               <span class="name">{name}</span>
               <span class="level">({level})</span>
@@ -503,7 +176,7 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
 
       <div class="right-side">
         <ul class="skills">
-          {#each skills as skill (skill)}
+          {#each cv.skills as skill (skill)}
             <li class="skill">{skill}</li>
           {/each}
         </ul>

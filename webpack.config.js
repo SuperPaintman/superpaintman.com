@@ -28,6 +28,7 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const sveltePreprocess = require('svelte-preprocess');
 const yaml = require('js-yaml');
+const { transformMacros } = require('./webpack/typescript/transformers/macros');
 
 /* Init */
 const mode = process.env.NODE_ENV || 'development';
@@ -236,7 +237,14 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'ts-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        options: {
+          getCustomTransformers() {
+            return {
+              before: [transformMacros]
+            };
+          }
+        }
       },
 
       /* Svelte */
