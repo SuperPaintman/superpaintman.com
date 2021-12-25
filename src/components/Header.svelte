@@ -36,10 +36,8 @@
       <div class="icon">AK</div>
     </a>
 
-    <ol class="links" use:links>
-      <li class="link"><a href="/">Links</a></li>
-      <li class="link"><a href="/blog">Blog</a></li>
-      <li class="link"><a href="/cv">CV</a></li>
+    <ol class="links">
+      <slot />
     </ol>
   </div>
 </nav>
@@ -108,21 +106,5 @@
     padding: 0;
 
     list-style: none;
-  }
-
-  .link {
-    margin: 0;
-    padding: 13px 22px;
-
-    border-radius: 4px;
-
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 16px;
-  }
-
-  .links :global(a) {
-    color: inherit;
-    text-decoration: none;
   }
 </style>

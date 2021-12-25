@@ -11,6 +11,7 @@
     SeoOpenGraph
   } from '~/components/seo';
   import Header from '~/components/Header.svelte';
+  import HeaderLink from '~/components/HeaderLink.svelte';
   import Footer from '~/components/Footer.svelte';
   import LinksPage from './pages/LinksPage.svelte';
   import CVPage from './pages/CVPage.svelte';
@@ -49,7 +50,10 @@
     />
 
     <Router {url}>
-      <Header />
+      <Header>
+        <HeaderLink to="/">Links</HeaderLink>
+        <HeaderLink to="/cv">CV</HeaderLink>
+      </Header>
 
       <main>
         <Route path="/" component={LinksPage} />
