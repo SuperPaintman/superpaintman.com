@@ -1,6 +1,11 @@
 <script lang="ts">
   import { marked } from 'marked';
-  import { SeoTitle, SeoDescription } from '~/components/seo';
+  import {
+    SeoTitle,
+    SeoDescription,
+    SeoKeywords,
+    SeoCanonical
+  } from '~/components/seo';
   import CVHeader from '~/components/CVHeader.svelte';
 
   const escapeTest = /[&<>"']/;
@@ -397,6 +402,8 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
 
 <SeoTitle value="Aleksandr Krivoshchekov (SuperPaintman) - CV / Resume" />
 <SeoDescription value={seoDescription} />
+<SeoKeywords value={['CV', 'Resume']} />
+<SeoCanonical value="https://superpaintman.com/cv" />
 
 <div class="root">
   <CVHeader />

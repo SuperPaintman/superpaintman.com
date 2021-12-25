@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SeoTitle, SeoDescription } from '~/components/seo';
+  import { SeoTitle, SeoDescription, SeoCanonical } from '~/components/seo';
   import LinkItem from '~/components/LinkItem.svelte';
 
   const src: string = require(`~/images/avatar.jpg?{
@@ -75,6 +75,7 @@
 <SeoDescription
   value="Aleksandr Krivoshchekov's (SuperPaintman) personal links."
 />
+<SeoCanonical value="https://superpaintman.com" />
 
 <div class="root">
   <div class="container">
