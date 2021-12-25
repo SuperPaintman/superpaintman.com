@@ -14,7 +14,9 @@
  * limitations under the License.
 -->
 <script lang="ts">
-  export let format: string | undefined;
+  import CVDownloadButton from '~/components/CVDownloadButton.svelte';
+
+  export let format: string | undefined = undefined;
 
   function formatPhone(value: string): string {
     // TODO
@@ -27,6 +29,17 @@
     <div class="left-side">
       <div class="fullname">Aleksandr Krivoshchekov</div>
       <div class="current-title">Lead Sofware Engineer</div>
+      {#if format !== 'pdf'}
+        <div class="download">
+          <CVDownloadButton
+            href="/cv.pdf"
+            title="Download CV as PDF"
+            target="_blank"
+          >
+            Download CV as PDF
+          </CVDownloadButton>
+        </div>
+      {/if}
     </div>
 
     <div class="right-side">
@@ -147,6 +160,10 @@
       font-size: 20px;
       line-height: 32px;
     }
+  }
+
+  .download {
+    margin-top: 16px;
   }
 
   .contact {

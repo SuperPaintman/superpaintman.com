@@ -25,7 +25,7 @@
   import * as cv from '~/content/cv';
   import SeoRobots from '~/components/seo/SeoRobots.svelte';
 
-  export let format: string | undefined;
+  export let format: string | undefined = undefined;
 
   const months: { [key: number]: string } = {
     1: 'Jan',

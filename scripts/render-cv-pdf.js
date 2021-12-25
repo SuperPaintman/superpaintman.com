@@ -18,14 +18,16 @@
 
 /* Imports */
 const fs = require('fs');
-const { join } = require('path');
+const { join, dirname } = require('path');
 const { promisify } = require('util');
 const puppeteer = require('puppeteer');
 const which = require('which');
+const mkdirp = require('mkdirp');
 const express = require('express');
 
 /* Constants */
 const ROOT = join(__dirname, '..');
+const OUTPUT = join(ROOT, 'public/pdf/Aleksandr_Krivoshchekov_CV_Resume.pdf');
 
 /* Init */
 const readFileAsync = promisify(fs.readFile);
@@ -139,8 +141,12 @@ async function main() {
     format: 'a4'
   });
 
+  const dir = dirname(OUTPUT);
+  console.log('Create output dir', { dir });
+  await mkdirp(dir);
+
   console.log('Write pdf file');
-  await writeFileAsync(join(ROOT, './cv.pdf'), data, 'utf-8');
+  await writeFileAsync(OUTPUT, data, 'utf-8');
 
   await browser.close();
   await server.close();

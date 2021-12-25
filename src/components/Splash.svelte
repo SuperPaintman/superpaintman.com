@@ -307,5 +307,7 @@
 
     top: 0;
     left: 0;
+
+    user-select: none;
   }
 </style>
