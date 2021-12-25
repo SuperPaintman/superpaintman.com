@@ -53,6 +53,10 @@
     padding: 0 32px;
 
     box-sizing: border-box;
+
+    @media (max-width: 512px) {
+      padding: 0 16px;
+    }
   }
 
   .splash {
@@ -106,5 +110,9 @@
     padding: 0;
 
     list-style: none;
+
+    @media (max-width: 512px) {
+      margin-right: -16px;
+    }
   }
 </style>

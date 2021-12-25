@@ -75,6 +75,18 @@
     margin: 32px 32px;
 
     align-items: center;
+
+    @media (max-width: 1024px) {
+      display: block;
+    }
+
+    // @media (max-width: 896px) {
+    //   margin: 32px 16px;
+    // }
+
+    // @media (max-width: 512px) {
+    //   margin: 32px 16px;
+    // }
   }
 
   .left-side {
@@ -83,12 +95,21 @@
 
   .right-side {
     flex: 0 0 auto;
+
+    @media (max-width: 1024px) {
+      margin-top: 16px;
+    }
   }
 
   .fullname {
     font-size: 42px;
     font-weight: 700;
     line-height: 48px;
+
+    @media (max-width: 512px + 32px) {
+      font-size: 24px;
+      line-height: 32px;
+    }
   }
 
   .current-title {
@@ -97,6 +118,13 @@
     font-size: 32px;
     font-weight: 400;
     line-height: 48px;
+
+    @media (max-width: 512px + 32px) {
+      margin-top: 0;
+
+      font-size: 20px;
+      line-height: 32px;
+    }
   }
 
   .contact {
@@ -108,6 +136,11 @@
     font-size: 16px;
     line-height: 32px;
     font-weight: 400;
+
+    @media (max-width: 512px + 32px) {
+      font-size: 14px;
+      line-height: 28px;
+    }
   }
 
   .contact-item {

@@ -525,6 +525,14 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     margin: 32px 0;
 
     border-bottom: 1px solid $divider-color;
+
+    @media (max-width: 896px) {
+      margin: 20px 0;
+    }
+
+    @media (max-width: 512px) {
+      margin: 16px 0;
+    }
   }
 
   .section {
@@ -602,12 +610,32 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     display: flex;
 
     margin: 32px 32px;
+
+    @media (max-width: 896px) {
+      display: block;
+
+      margin: 20px 32px + (12px - floor(7px / 2) - 1px) * 2;
+    }
+
+    @media (max-width: 512px) {
+      margin: 16px 32px;
+    }
   }
 
   .left-side {
     flex: 0 0 auto;
 
     width: $left-side-width;
+
+    @media (max-width: 896px) {
+      width: 0;
+
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 512px) {
+      margin-bottom: 10px;
+    }
   }
 
   .right-side {
@@ -616,6 +644,10 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     width: 100%;
 
     margin-right: $left-side-width;
+
+    @media (max-width: 896px) {
+      margin-right: 0;
+    }
   }
 
   .section-title {
@@ -626,6 +658,12 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     font-size: 16px;
     font-weight: 700;
     text-align: right;
+
+    @media (max-width: 896px) {
+      margin-right: 0;
+
+      text-align: left;
+    }
   }
 
   .skills {
@@ -654,6 +692,14 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     margin-bottom: 8px;
 
     box-sizing: border-box;
+
+    @media (max-width: 1024px) {
+      width: 50%;
+    }
+
+    @media (max-width: 400px) {
+      width: 100%;
+    }
   }
 
   .languages {
@@ -679,6 +725,10 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     position: relative;
 
     margin-bottom: $position-gap-height;
+
+    @media (max-width: 512px) {
+      margin-bottom: 42px;
+    }
   }
 
   .position:last-child {
@@ -701,6 +751,10 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     border-radius: 50%;
 
     z-index: 1;
+
+    @media (max-width: 512px) {
+      left: -16px - floor(@width / 2) - 1px;
+    }
   }
 
   .position .line {
@@ -713,6 +767,12 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     left: -24px;
 
     background: $position-dot-color;
+
+    @media (max-width: 512px) {
+      height: "calc(100% + %s)" % (42px + 5px);
+
+      left: -16px;
+    }
   }
 
   .position .title {
@@ -723,6 +783,12 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     font-size: 22px;
     font-weight: 400;
     line-height: 24px;
+
+    @media (max-width: 512px) {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 24px;
+    }
   }
 
   .position .info {
@@ -775,6 +841,14 @@ TypeScript, JavaScript, Node.js, C, AngularJS 1.5, Docker, MongoDB, PostgreSQL, 
     font-size: 12px;
     text-align: center;
     line-height: @height;
+
+    @media (max-width: 512px) {
+      height: 42px;
+
+      bottom: -1 * @height + 2px;
+
+      line-height: @height;
+    }
   }
 
   .position:last-child .position-divider {

@@ -116,6 +116,7 @@
 </div>
 
 <style lang="stylus">
+  $main-max-width = 512px;
   $photo-size = 128px;
   $photo-border-padding = 4px;
 
@@ -126,19 +127,40 @@
     padding: 0 32px;
 
     box-sizing: border-box;
+
+    @media (max-width: 1024px) {
+      margin-top: 0;
+    }
+
+    @media (max-width: $main-max-width) {
+      padding: 0 16px;
+    }
   }
 
   .main {
-    max-width: 512px;
+    max-width: $main-max-width;
 
     margin: auto;
     padding: 0 $photo-size + $photo-border-padding * 2 + 32px;
+
+    @media (max-width: 1024px) {
+      padding: 0 32px;
+    }
+
+    @media (max-width: 512px) {
+      padding: 0;
+    }
   }
 
   .about {
     position: relative;
 
     margin: 64px + 32px 0;
+
+    @media (max-width: 1024px) {
+      margin-top: 0;
+      margin-bottom: 32px;
+    }
   }
 
   .photo {
@@ -153,6 +175,15 @@
     background: #ffffff;
 
     border-radius: 50%;
+
+    @media (max-width: 1024px) {
+      position: relative;
+
+      top: 0;
+      left: 0;
+
+      margin: 32px auto;
+    }
   }
 
   .photo .inner {
@@ -191,12 +222,24 @@
     font-size: 42px;
     font-weight: 700;
     line-height: 48px;
+
+    @media (max-width: $main-max-width) {
+      font-size: 24px;
+      line-height: 32px;
+      text-align: center;
+    }
   }
 
   .current-title {
     font-size: 24px;
     font-weight: 400;
     line-height: 48px;
+
+    @media (max-width: $main-max-width) {
+      font-size: 20px;
+      line-height: 32px;
+      text-align: center;
+    }
   }
 
   .links {
@@ -204,5 +247,9 @@
     margin: 64px 0;
 
     list-style: none;
+
+    @media (max-width: $main-max-width) {
+      margin-top: 38px;
+    }
   }
 </style>

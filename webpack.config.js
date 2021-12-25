@@ -271,6 +271,10 @@ module.exports = {
             // emitCss: prod,
             emitCss: true, // Responsive loader doesn't work without it.
             hotReload: !prod,
+            hotOptions: {
+              noPreserveState: false,
+              optimistic: true
+            },
             preprocess: sveltePreprocess({ sourceMap: !prod })
           }
         }
