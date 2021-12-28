@@ -33,7 +33,7 @@
         <div class="download">
           <CVDownloadButton
             href="/cv.pdf"
-            title="Download CV as PDF"
+            title="Download my CV as PDF"
             target="_blank"
           >
             Download my CV as PDF
