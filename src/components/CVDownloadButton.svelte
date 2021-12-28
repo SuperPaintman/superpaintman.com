@@ -65,17 +65,25 @@
 
 <style lang="stylus">
   $border = 2px;
+  $border-radius = 6px;
 
   .root {
     display: inline-block;
     position: relative;
 
-    border-radius: 4px;
+    border-radius: $border-radius;
 
-    color: inherit;
+    color: #ffffff;
     font-size: 16px;
+    font-weight: 700;
     line-height: 16px;
     text-decoration: none;
+
+    @media (max-width: 512px) {
+      display: block;
+
+      text-align: center;
+    }
   }
 
   .inner {
@@ -83,7 +91,9 @@
 
     padding: 12px 20px;
 
-    background-color: #ffffff;
+    background-color: #000000;
+
+    border-radius: $border-radius;
 
     overflow: hidden;
   }
@@ -99,7 +109,7 @@
 
     padding: $border;
 
-    border-radius: 4px;
+    border-radius: $border-radius;
 
     overflow: hidden;
 

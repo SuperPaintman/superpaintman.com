@@ -36,7 +36,7 @@
             title="Download CV as PDF"
             target="_blank"
           >
-            Download CV as PDF
+            Download my CV as PDF
           </CVDownloadButton>
         </div>
       {/if}

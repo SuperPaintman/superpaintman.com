@@ -115,6 +115,7 @@
 
 <style lang="stylus">
   $border = 2px;
+  $border-radius = 6px;
 
   .root {
     display: block;
@@ -122,10 +123,12 @@
 
     margin-bottom: 16px;
 
-    border-radius: 4px;
+    border-radius: $border-radius;
 
     color: inherit;
+    // color: #ffffff;
     font-size: 16px;
+    // font-weight: 700;
     line-height: 16px;
     text-decoration: none;
   }
@@ -135,7 +138,10 @@
 
     padding: 16px 32px;
 
+    // background-color: #000000;
     background-color: #ffffff;
+
+    border-radius: $border-radius;
 
     overflow: hidden;
   }
@@ -151,7 +157,7 @@
 
     padding: $border;
 
-    border-radius: 4px;
+    border-radius: $border-radius;
 
     overflow: hidden;
 
