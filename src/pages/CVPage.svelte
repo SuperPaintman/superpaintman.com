@@ -267,6 +267,10 @@
   }
 
   .section .description {
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
     :global {
       p {
         margin: 0;

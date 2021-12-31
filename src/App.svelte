@@ -99,10 +99,12 @@
     <Layout>
       <Router url={virtualUrl}>
         <LayoutSlot name="header">
-          <Header>
-            <HeaderLink to="/">Links</HeaderLink>
-            <HeaderLink to="/cv">CV</HeaderLink>
-          </Header>
+          <div class="header">
+            <Header>
+              <HeaderLink to="/">Links</HeaderLink>
+              <HeaderLink to="/cv">CV</HeaderLink>
+            </Header>
+          </div>
         </LayoutSlot>
 
         <main>
@@ -129,5 +131,11 @@
 <style lang="stylus">
   .root {
     overflow: hidden;
+  }
+
+  .header {
+    @media print {
+      display: none;
+    }
   }
 </style>

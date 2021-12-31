@@ -164,6 +164,10 @@
 
   .download {
     margin-top: 16px;
+
+    @media print {
+      display: none;
+    }
   }
 
   .contact {
