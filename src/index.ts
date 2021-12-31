@@ -23,7 +23,10 @@ import App from './App.svelte';
 if (!module.parent && typeof global.document !== 'undefined') {
   new App({
     target: document.getElementById('root')!,
-    hydrate: IS_SSR || false
+    hydrate: IS_SSR || false,
+    props: {
+      serverData: window.__SERVER_DATA__
+    }
   });
 }
 

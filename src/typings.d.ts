@@ -16,6 +16,16 @@
 
 declare const IS_SSR: boolean;
 
+type ServerData = {
+  error?: {
+    code?: number;
+  };
+};
+
+interface Window {
+  __SERVER_DATA__?: ServerData;
+}
+
 /* Magic macros */
 declare function $$trim$$(source: string): string;
 declare function $$markdown$$(source: string): string;

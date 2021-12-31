@@ -38,6 +38,7 @@
   import ErrorPage from './pages/ErrorPage.svelte';
 
   export let url = '';
+  export let serverData: ServerData | undefined = undefined;
 
   const format = writable<string | undefined>(undefined);
   onMount(() => {
@@ -54,6 +55,15 @@
       format.set(undefined);
     }
   });
+
+  let virtualUrl: string;
+  $: {
+    if (serverData?.error?.code !== undefined) {
+      virtualUrl = `/__INTERNAL__/error-page/${serverData.error.code}`;
+    } else {
+      virtualUrl = url;
+    }
+  }
 </script>
 
 <div class="root">
@@ -87,7 +97,7 @@
     />
 
     <Layout>
-      <Router {url}>
+      <Router url={virtualUrl}>
         <LayoutSlot name="header">
           <Header>
             <HeaderLink to="/">Links</HeaderLink>
@@ -100,6 +110,9 @@
           <Route path="/cv" component={CVPage} format={$format} />
           <Route path="/__INTERNAL__/error-page/:code" let:params>
             <ErrorPage code={parseInt(params.code, 10)} />
+          </Route>
+          <Route path="*">
+            <ErrorPage code={404} />
           </Route>
         </main>
 

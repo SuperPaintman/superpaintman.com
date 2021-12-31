@@ -82,6 +82,7 @@ class HtmlWebpackSveltePlugin {
             data.html = data.html.replace('$$html$$', '');
             data.html = data.html.replace('$$css$$', '');
             data.html = data.html.replace('$$head$$', '');
+            data.html = data.html.replace('$$serverData$$', '');
             return;
           }
 
@@ -114,6 +115,14 @@ class HtmlWebpackSveltePlugin {
           // );
           data.html = data.html.replace('$$css$$', '');
           data.html = data.html.replace('$$head$$', component.head);
+          data.html = data.html.replace(
+            '$$serverData$$',
+            `<script type="text/javascript">
+  (function (w) {
+    w.__SERVER_DATA__ = ${JSON.stringify(data.plugin.options.serverData)};
+  })(window);
+</script>`
+          );
         }
       );
     });
@@ -198,22 +207,28 @@ module.exports = {
         url: '/cv',
         filename: 'pages/cv.html'
       }),
-    ...(ssr &&
-      [
-        // 4xx
-        400, 401, 403, 404, 405, 406, 408, 410, 413, 414, 426, 429, 431,
+    ...(ssr
+      ? [
+          // 4xx
+          400, 401, 403, 404, 405, 406, 408, 410, 413, 414, 426, 429, 431,
 
-        // 5xx
-        500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511
-      ].map(
-        (code) =>
-          new HtmlWebpackPlugin({
-            template: path.join(srcPath, 'index.html'),
-            excludeChunks: ['server'],
-            url: `/__INTERNAL__/error-page/${code}`,
-            filename: `__INTERNAL__/error-page/${code}.html`
-          })
-      )),
+          // 5xx
+          500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511
+        ].map(
+          (code) =>
+            new HtmlWebpackPlugin({
+              template: path.join(srcPath, 'index.html'),
+              excludeChunks: ['server'],
+              url: `/__INTERNAL__/error-page/${code}`,
+              filename: `__INTERNAL__/error-page/${code}.html`,
+              serverData: {
+                error: {
+                  code
+                }
+              }
+            })
+        )
+      : []),
 
     /* Favicons */
     new FaviconsWebpackPlugin({
