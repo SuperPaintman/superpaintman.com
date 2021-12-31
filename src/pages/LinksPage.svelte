@@ -133,7 +133,8 @@
 <style lang="stylus">
   $main-max-width = 512px;
   $photo-size = 128px;
-  $photo-border-padding = 4px;
+  $photo-border = 3px;
+  $photo-border-padding = 0;
 
   .container {
     max-width: 1200px;
@@ -213,13 +214,13 @@
   .photo-border {
     position: absolute;
 
-    top: -1 * $photo-border-padding - 2px;
-    left: -1 * $photo-border-padding - 2px;
+    top: 0 - $photo-border-padding - $photo-border;
+    left: 0 - $photo-border-padding - $photo-border;
 
     width: $photo-size + $photo-border-padding * 2;
     height: @width;
 
-    border: 2px solid #ffffff;
+    border: $photo-border solid #ffffff;
     border-radius: 50%;
 
     z-index: -1;
