@@ -198,6 +198,22 @@ module.exports = {
         url: '/cv',
         filename: 'pages/cv.html'
       }),
+    ...(ssr &&
+      [
+        // 4xx
+        400, 401, 403, 404, 405, 406, 408, 410, 413, 414, 426, 429, 431,
+
+        // 5xx
+        500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511
+      ].map(
+        (code) =>
+          new HtmlWebpackPlugin({
+            template: path.join(srcPath, 'index.html'),
+            excludeChunks: ['server'],
+            url: `/__INTERNAL__/error-page/${code}`,
+            filename: `__INTERNAL__/error-page/${code}.html`
+          })
+      )),
 
     /* Favicons */
     new FaviconsWebpackPlugin({

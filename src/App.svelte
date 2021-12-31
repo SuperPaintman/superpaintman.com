@@ -35,6 +35,7 @@
   import Counters from '~/components/Counters.svelte';
   import LinksPage from './pages/LinksPage.svelte';
   import CVPage from './pages/CVPage.svelte';
+  import ErrorPage from './pages/ErrorPage.svelte';
 
   export let url = '';
 
@@ -97,6 +98,9 @@
         <main>
           <Route path="/" component={LinksPage} />
           <Route path="/cv" component={CVPage} format={$format} />
+          <Route path="/__INTERNAL__/error-page/:code" let:params>
+            <ErrorPage code={parseInt(params.code, 10)} />
+          </Route>
         </main>
 
         <LayoutSlot name="header">
