@@ -43,7 +43,7 @@
     "responsive-loader": "2.3.0",
     "stylus": "0.54.8",
     "stylus-loader": "6.1.0",
-    "svelte": "^3.31.2",
+    "svelte": "^3.49.0",
     "svelte-check": "2.2.3",
     "svelte-loader": "^3.0.0",
     "svelte-preprocess": "4.7.4",
