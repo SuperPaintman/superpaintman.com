@@ -16,9 +16,14 @@
 
 'use strict';
 /* Imports */
-import { defaultsDeep } from 'lodash/fp';
+import defaultsDeep from 'lodash/defaultsDeep';
+import * as config from '~/config';
+import { Color } from '~/lib/colors';
 import type { DeepPartial } from '~/lib/types';
 import { roughjs, RoughCanvas, defaultOptions } from '~/lib/roughjs';
+
+const textColor = Color.fromHEX(config.colors.grey);
+const gridColor = Color.fromHEX(config.colors.grey).setA(0.6);
 
 export abstract class Chart {
   protected _element: HTMLCanvasElement;
@@ -89,6 +94,9 @@ const defaultTimeSeriesOptions: TimeSeriesRequiredOptions<unknown, unknown> = {
 export type Series<X, Y> = {
   label: string;
   data: Array<Datapoint<X, Y>>;
+  styles?: {
+    fill?: string;
+  };
 };
 
 export type Datapoint<X, Y> = {
@@ -135,6 +143,7 @@ export class TimeSeries extends Chart {
     this._ctx.font = '16px "FG Virgil"';
     this._ctx.textAlign = 'right';
     this._ctx.textBaseline = 'middle';
+    this._ctx.fillStyle = textColor.toString();
 
     const widht = this._width;
     const height = this._height;
@@ -172,7 +181,8 @@ export class TimeSeries extends Chart {
         margin + leftPanelWidth + boxWidth,
         y,
         {
-          seed: yStep + 1
+          seed: yStep + 1,
+          stroke: gridColor.toString()
         }
       );
     }
@@ -261,11 +271,12 @@ export class TimeSeries extends Chart {
           continue;
         }
 
+        const fill = this._series[j].styles?.fill;
         const hh = Math.floor((boxHeight * (v - yMin)) / yMax);
 
         this._rc.rectangle(x, y, w, hh, {
           // seed: bin.x,
-          fill: 'rgba(255, 0, 0, 0.5)'
+          fill
         });
         y += hh;
       }

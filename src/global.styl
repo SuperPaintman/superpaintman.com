@@ -17,14 +17,16 @@
 /* Imports */
 @import "normalize.css/normalize.css";
 @import "config.styl";
-@import "fonts.styl"
+@import "fonts.css"
 
 /* Init */
-if $font_main == "Roboto" {
+if $font-main == "Roboto" {
   @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,100,300,700&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic");
 }
 
 /* General */
 body {
-  font-family: $font_main, sans-serif, serif;
+  background-color: $color-white;
+  font-family: $font-main, sans-serif, serif;
+  color: $color-black;
 }

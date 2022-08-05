@@ -19,9 +19,9 @@
  */
 @font-face {
   font-family: "FG Virgil";
-  src: url("~/fonts/FG_Virgil.ttf"),
-       url("~/fonts/FG_Virgil.woff") format("woff"),
-       url("~/fonts/FG_Virgil.woff2") format("woff2");
+  src: url("./fonts/FG_Virgil.ttf"),
+       url("./fonts/FG_Virgil.woff") format("woff"),
+       url("./fonts/FG_Virgil.woff2") format("woff2");
   font-display: swap;
   font-weight: 400;
   font-style: normal;
