@@ -381,6 +381,15 @@ module.exports = {
             }
           }
         ]
+      },
+
+      /* Fonts */
+      {
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: `fonts/[name]${onlyProd('.[sha256:hash]', '')}.[ext]`
+        }
       }
     ])
   },

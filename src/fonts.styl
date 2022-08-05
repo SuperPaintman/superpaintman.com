@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-/* Imports */
-@import "normalize.css/normalize.css";
-@import "config.styl";
-@import "fonts.styl"
-
-/* Init */
-if $font_main == "Roboto" {
-  @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,100,300,700&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic");
-}
-
-/* General */
-body {
-  font-family: $font_main, sans-serif, serif;
+/*!
+ * http://www.eaglefonts.com/fg-virgil-ttf-131249.htm
+ */
+@font-face {
+  font-family: "FG Virgil";
+  src: url("~/fonts/FG_Virgil.ttf"),
+       url("~/fonts/FG_Virgil.woff") format("woff"),
+       url("~/fonts/FG_Virgil.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
 }

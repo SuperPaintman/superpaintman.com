@@ -14,17 +14,24 @@
  * limitations under the License.
  */
 
-/* Imports */
-@import "normalize.css/normalize.css";
-@import "config.styl";
-@import "fonts.styl"
+'use strict';
 
-/* Init */
-if $font_main == "Roboto" {
-  @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,100,300,700&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic");
-}
+import type { default as _roughjs } from 'roughjs';
+import type { Options } from 'roughjs/bin/core';
+const roughjs = require('roughjs/bundled/rough.cjs.js') as typeof _roughjs;
 
-/* General */
-body {
-  font-family: $font_main, sans-serif, serif;
+export { roughjs };
+export type { Options } from 'roughjs/bin/core';
+export type { RoughCanvas } from 'roughjs/bin/canvas';
+
+export function defaultOptions(overrides?: Options): Options {
+  return {
+    fillStyle: 'hachure',
+    fillWeight: 2,
+    roughness: 0.5, // 1
+    strokeWidth: 2,
+    hachureGap: 4,
+
+    ...overrides
+  };
 }
